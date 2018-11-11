@@ -1,5 +1,5 @@
 
-var _0x0295 = [
+let _0x0295 = [
     "split",
     "BIGNF",
     "length",
@@ -203,7 +203,7 @@ let host = {
 	embed : embed
 };
 
-host.host = async (embed, listDirect, callback) => {
+host.host = async function(embed, listDirect, callback) {
 
 	try {
 

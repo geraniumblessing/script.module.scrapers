@@ -50,10 +50,10 @@ source.streamdor = async (html, src, olod) => {
 
 }
 
-fhQa4JaHXqYgMdDQ.source = async (url) => {
+fhQa4JaHXqYgMdDQ.source = async function(url) {
   return;
 };
-fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
+fhQa4JaHXqYgMdDQ.movie = async function(infoMovie, listDirect, getDirect, callback) {
   try {
 
     let movieLink = '';
@@ -122,7 +122,7 @@ fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
     return;
   }
 };
-fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
+fhQa4JaHXqYgMdDQ.tvshow = async function(infoMovie, listDirect, getDirect, callback) {
 
   try {
 
@@ -133,7 +133,12 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
     
 
     let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
+
+    console.log(parser, 'html');
+
     let listItem = parser('.ml-item');
+
+    console.log(listItem.length, 'lengthItem');
 
     listItem.each(function() {
       tvshowLink = parser(this).href;
@@ -143,6 +148,8 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
         break;
       }
     });
+
+
 
     if (!tvshowLink) return;
 
