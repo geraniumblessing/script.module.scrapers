@@ -1,17 +1,15 @@
 
-// let source = {};
+source = {
+	priority: 1,
+	language: ['en'],
+	domains : ['cmovieshd.net'],
+	base_link : 'http://cmovieshd.net/',
+  tv_link: 'https://cmovieshd.net/tv-series/',
+  movie_link: 'https://cmovieshd.net/movie/',
+	search_link : 'https://cmovieshd.net/search/?q='
+};
 
-let priority =  1,
-let language= ['en'],
-let domains = ['cmovieshd.net'],
-let base_link = 'http://cmovieshd.net/',
-let tv_link = 'https://cmovieshd.net/tv-series/',
-let movie_link = 'https://cmovieshd.net/movie/',
-let search_link = 'https://cmovieshd.net/search/?q='
-
-
-
-let streamdor = async (html, src, olod) => {
+source.streamdor = async (html, src, olod) => {
 
   let episodeId = html.match(/.*streamdor.co/video/(\d+)/ig);
 
@@ -62,7 +60,7 @@ fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
     let listLink = [];
 
 
-    let searchLink = search_link + infoMovie.title + "+" +infoMovie.year;
+    let searchLink = source.search_link + infoMovie.title + "+" +infoMovie.year;
     let parser = await client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
     if (!parser) return;
@@ -101,7 +99,7 @@ fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
         let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
-          let embed = await streamdor(trim(openloadLink[0]), item, true);
+          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
           if (embed) {
 
             getDirect(embed, listDirect, callback);
@@ -109,7 +107,7 @@ fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
         }
       } else {
 
-        let embed = await streamdor(parserEmbed, item, false);
+        let embed = await source.streamdor(parserEmbed, item, false);
 
         if(embed) {
 
@@ -134,7 +132,7 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
     let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
 
-    let parser = await client.request(search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
+    let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
     let listItem = parser('.ml-item');
 
     listItem.each(function() {
@@ -168,7 +166,7 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
         let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
-          let embed = await streamdor(trim(openloadLink[0]), item, true);
+          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
           if (embed) {
 
             getDirect(embed, listDirect, callback);
@@ -176,7 +174,7 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
         }
       } else {
 
-        let embed = await streamdor(parserEmbed, item, false);
+        let embed = await source.streamdor(parserEmbed, item, false);
 
         if(embed) {
 
@@ -190,6 +188,5 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
     return;
   }
 };
-
 
 // fhQa4JaHXqYgMdDQ = source;
