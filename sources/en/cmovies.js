@@ -131,6 +131,7 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
 
     let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
+    console.log(searchText, 'textSearch'); 
 
     let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
