@@ -1,7 +1,7 @@
 
 
-fhQa4JaHXqYgMdDQ.tvshow = function() {
-  console.log('tvshowtest');
+fhQa4JaHXqYgMdDQ.tvshow = async function(infoMovie, listDirect, getDirect, callback) {
+  console.log(infoMovie, listDirect, getDirect, callback);
   return;
 }
 // source = {
