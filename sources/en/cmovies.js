@@ -1,15 +1,20 @@
 
-source = {
-	priority: 1,
-	language: ['en'],
-	domains : ['cmovieshd.net'],
-	base_link : 'http://cmovieshd.net/',
-  tv_link: 'https://cmovieshd.net/tv-series/',
-  movie_link: 'https://cmovieshd.net/movie/',
-	search_link : 'https://cmovieshd.net/search/?q='
-};
 
-source.streamdor = async  (html, src, olod) => {
+fhQa4JaHXqYgMdDQ.tvshow = function() {
+  console.log('tvshowtest');
+  return;
+}
+// source = {
+// 	priority: 1,
+// 	language: ['en'],
+// 	domains : ['cmovieshd.net'],
+// 	base_link : 'http://cmovieshd.net/',
+//   tv_link: 'https://cmovieshd.net/tv-series/',
+//   movie_link: 'https://cmovieshd.net/movie/',
+// 	search_link : 'https://cmovieshd.net/search/?q='
+// };
+
+// source.streamdor = async  (html, src, olod) => {
 
   // let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
@@ -46,15 +51,15 @@ source.streamdor = async  (html, src, olod) => {
   //     'info': '', direct: false, 'debridonly': False
   //   };
   // }
-  return false;
+//   return false;
 
-}
+// }
 
-fhQa4JaHXqYgMdDQ.source = async (url) => {
-  return;
-};
-fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
-  try {
+// fhQa4JaHXqYgMdDQ.source = async (url) => {
+//   return;
+// };
+// fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
+//   try {
 
     // let movieLink = '';
     // let listLink = [];
@@ -117,21 +122,21 @@ fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
     //   }
     // });
     // await Promise.all(arrPromise);
-    return;
-  } catch(e) {
-    return;
-  }
-};
-fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
+//     return;
+//   } catch(e) {
+//     return;
+//   }
+// };
+// fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 
-  try {
+//   try {
 
     // let tvshowLink = '';
     // let episodeLink = [];
 
     // let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
-    console.log('info', infoMovie, listDirect, getDirect, callback); 
+    // console.log('info', infoMovie, listDirect, getDirect, callback); 
     // console.log(searchText, 'textSearch'); 
 
     // let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
@@ -193,10 +198,10 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
     //   }
     // });
 
-  } catch(e) {
-    console.log(String(e));
-    return;
-  }
-};
+//   } catch(e) {
+//     console.log(String(e));
+//     return;
+//   }
+// };
 
 // fhQa4JaHXqYgMdDQ = source;
