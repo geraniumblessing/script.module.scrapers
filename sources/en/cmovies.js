@@ -1,5 +1,5 @@
 
-let source = {};
+// let source = {};
 
 let priority =  1,
 let language= ['en'],
@@ -52,10 +52,10 @@ let streamdor = async (html, src, olod) => {
 
 }
 
-source.source = async (url) => {
+fhQa4JaHXqYgMdDQ.source = async (url) => {
   return;
 };
-source.movie = async (infoMovie, listDirect, getDirect, callback) => {
+fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
   try {
 
     let movieLink = '';
@@ -124,7 +124,7 @@ source.movie = async (infoMovie, listDirect, getDirect, callback) => {
     return;
   }
 };
-source.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
+fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 
   try {
 
@@ -192,4 +192,4 @@ source.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 };
 
 
-fhQa4JaHXqYgMdDQ = source;
+// fhQa4JaHXqYgMdDQ = source;
