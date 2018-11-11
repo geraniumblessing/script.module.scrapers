@@ -9,7 +9,7 @@ source = {
 	search_link : 'https://cmovieshd.net/search/?q='
 };
 
-source.streamdor = async (html, src, olod) => {
+source.streamdor = async function (html, src, olod) {
 
   let episodeId = html.match(/.*streamdor.co/video/(\d+)/ig);
 
