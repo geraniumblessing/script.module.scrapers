@@ -126,13 +126,13 @@ fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => 
 
   try {
 
-    let tvshowLink = '';
-    let episodeLink = [];
+    // let tvshowLink = '';
+    // let episodeLink = [];
 
-    let searchText = infoMovie.title + ' season ' + infoMovie.season;
+    // let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
     console.log('info', infoMovie, listDirect, getDirect, callback); 
-    console.log(searchText, 'textSearch'); 
+    // console.log(searchText, 'textSearch'); 
 
     // let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
