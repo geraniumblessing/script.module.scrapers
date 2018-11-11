@@ -203,7 +203,7 @@ let host = {
 	embed : embed
 };
 
-host.host = async function(embed, listDirect, callback) {
+host.host = async (embed, listDirect, callback) => {
 
 	try {
 

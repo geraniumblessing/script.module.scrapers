@@ -9,7 +9,7 @@ source = {
 	search_link : 'https://cmovieshd.net/search/?q='
 };
 
-source.streamdor = async function (html, src, olod) {
+source.streamdor = async  (html, src, olod) => {
 
   let episodeId = html.match(/.*streamdor.co/video/(\d+)/ig);
 
@@ -50,10 +50,10 @@ source.streamdor = async function (html, src, olod) {
 
 }
 
-fhQa4JaHXqYgMdDQ.source = async function(url) {
+fhQa4JaHXqYgMdDQ.source = async (url) => {
   return;
 };
-fhQa4JaHXqYgMdDQ.movie = async function(infoMovie, listDirect, getDirect, callback) {
+fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
   try {
 
     let movieLink = '';
@@ -122,7 +122,7 @@ fhQa4JaHXqYgMdDQ.movie = async function(infoMovie, listDirect, getDirect, callba
     return;
   }
 };
-fhQa4JaHXqYgMdDQ.tvshow = async function(infoMovie, listDirect, getDirect, callback) {
+fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 
   try {
 
