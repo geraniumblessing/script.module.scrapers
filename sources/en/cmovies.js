@@ -1,207 +1,203 @@
 
 
-fhQa4JaHXqYgMdDQ.tvshow = async function(infoMovie, listDirect, getDirect, callback) {
-  console.log(infoMovie, listDirect, getDirect, callback);
-  return;
-}
-// source = {
-// 	priority: 1,
-// 	language: ['en'],
-// 	domains : ['cmovieshd.net'],
-// 	base_link : 'http://cmovieshd.net/',
-//   tv_link: 'https://cmovieshd.net/tv-series/',
-//   movie_link: 'https://cmovieshd.net/movie/',
-// 	search_link : 'https://cmovieshd.net/search/?q='
-// };
 
-// source.streamdor = async  (html, src, olod) => {
+source = {
+	priority: 1,
+	language: ['en'],
+	domains : ['cmovieshd.net'],
+	base_link : 'http://cmovieshd.net/',
+  tv_link: 'https://cmovieshd.net/tv-series/',
+  movie_link: 'https://cmovieshd.net/movie/',
+	search_link : 'https://cmovieshd.net/search/?q='
+};
 
-  // let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
+async function streamdor  (html, src, olod) {
 
-  // if (!episodeId) return;
+  let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
-  // parserEpisode = await client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
-  // parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
-  // parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
-  // parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
-  // parserEpisode = base64.decode(parserEpisode);
-  // parserEpisode = aes(parserEpisode);
+  if (!episodeId) return;
+
+  parserEpisode = await client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
+  parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
+  parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
+  parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
+  parserEpisode = base64.decode(parserEpisode);
+  parserEpisode = aes(parserEpisode);
   
 
-  // qual = parserEpisode.match(/label:"(.*?)"/i);
+  qual = parserEpisode.match(/label:"(.*?)"/i);
 
-  // if (qual) {qual = qual[0];}
-  // else {qual = 'SD';}
+  if (qual) {qual = qual[0];}
+  else {qual = 'SD';}
 
-  // let findEmbed = parserEpisode.match(/(https://streamango.com/embed/.*?)/i);
-
-
-  // if (findEmbed) {
-
-  //   return detail = {
-  //     'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
-  //     'info': '', direct: false, 'debridonly': False
-  //   };
-
-  // }
-
-  // if (olod) {
-  //   return {
-  //     'source': 'openload.co', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
-  //     'info': '', direct: false, 'debridonly': False
-  //   };
-  // }
-//   return false;
-
-// }
-
-// fhQa4JaHXqYgMdDQ.source = async (url) => {
-//   return;
-// };
-// fhQa4JaHXqYgMdDQ.movie = async (infoMovie, listDirect, getDirect, callback) => {
-//   try {
-
-    // let movieLink = '';
-    // let listLink = [];
+  let findEmbed = parserEpisode.match(/(https://streamango.com/embed/.*?)/i);
 
 
-    // let searchLink = source.search_link + infoMovie.title + "+" +infoMovie.year;
-    // let parser = await client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
+  if (findEmbed) {
 
-    // if (!parser) return;
+    return detail = {
+      'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
+      'info': '', direct: false, 'debridonly': False
+    };
 
-    // let listItem = parser('a.ml-mask');
+  }
+
+  if (olod) {
+    return {
+      'source': 'openload.co', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
+      'info': '', direct: false, 'debridonly': False
+    };
+  }
+  return false;
+
+}
+
+async function source = (url) {
+  return;
+};
+async function movie = (infoMovie, listDirect, getDirect, callback) {
+  try {
+
+    let movieLink = '';
+    let listLink = [];
 
 
-    // listItem.each(function() {
+    let searchLink = source.search_link + infoMovie.title + "+" +infoMovie.year;
+    let parser = await client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
-    //   let title = parser(this).attr('title');
+    if (!parser) return;
 
-    //   if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
-    //     movieLink = parse(this).href;
-    //     break;
-    //   }
-    // });
+    let listItem = parser('a.ml-mask');
 
-    // if (movieLink == '') return;
 
-    // parser = await client.request(movieLink+"watch", 'GET', {}, {}, false, '' ,'' ,'' ,'dom');
+    listItem.each(function() {
 
-    // if (!parser) return;
+      let title = parser(this).attr('title');
 
-    // let listEps = parser('.btn-eps');
+      if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
+        movieLink = parse(this).href;
+        break;
+      }
+    });
 
-    // listEps.each(function() {
-    //     listLinks.push(parser(this).href);
-    // });
+    if (movieLink == '') return;
 
-    // let arrPromise = listLinks.map(async (item) => {
+    parser = await client.request(movieLink+"watch", 'GET', {}, {}, false, '' ,'' ,'' ,'dom');
 
-    //   let parserEmbed = client.request(item, 'GET');
+    if (!parser) return;
 
-    //   if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+    let listEps = parser('.btn-eps');
 
-    //     let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
-    //     if (openloadLink) {
+    listEps.each(function() {
+        listLinks.push(parser(this).href);
+    });
 
-    //       let embed = await source.streamdor(trim(openloadLink[0]), item, true);
-    //       if (embed) {
+    let arrPromise = listLinks.map(async (item) => {
 
-    //         getDirect(embed, listDirect, callback);
-    //       }
-    //     }
-    //   } else {
+      let parserEmbed = client.request(item, 'GET');
 
-    //     let embed = await source.streamdor(parserEmbed, item, false);
+      if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
-    //     if(embed) {
+        let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
+        if (openloadLink) {
 
-    //       getDirect(embed, listDirect, callback);
-    //     }
+          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
+          if (embed) {
+
+            getDirect(embed, listDirect, callback);
+          }
+        }
+      } else {
+
+        let embed = await source.streamdor(parserEmbed, item, false);
+
+        if(embed) {
+
+          getDirect(embed, listDirect, callback);
+        }
         
-    //   }
-    // });
-    // await Promise.all(arrPromise);
-//     return;
-//   } catch(e) {
-//     return;
-//   }
-// };
-// fhQa4JaHXqYgMdDQ.tvshow = async (infoMovie, listDirect, getDirect, callback) => {
+      }
+    });
+    await Promise.all(arrPromise);
+    return;
+  } catch(e) {
+    return;
+  }
+};
+async function tvshow = async (infoMovie, listDirect, getDirect, callback) {
 
-//   try {
+  try {
 
-    // let tvshowLink = '';
-    // let episodeLink = [];
+    let tvshowLink = '';
+    let episodeLink = [];
 
-    // let searchText = infoMovie.title + ' season ' + infoMovie.season;
+    let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
-    // console.log('info', infoMovie, listDirect, getDirect, callback); 
-    // console.log(searchText, 'textSearch'); 
+    console.log('info', infoMovie, listDirect, getDirect, callback); 
+    console.log(searchText, 'textSearch'); 
 
-    // let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
+    let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
-    // console.log(parser, 'html');
+    console.log(parser, 'html');
 
-    // let listItem = parser('.ml-item');
+    let listItem = parser('.ml-item');
 
-    // console.log(listItem.length, 'lengthItem');
+    console.log(listItem.length, 'lengthItem');
 
-    // listItem.each(function() {
-    //   tvshowLink = parser(this).href;
-    //   const title = parser(this).attr('title');
+    listItem.each(function() {
+      tvshowLink = parser(this).href;
+      const title = parser(this).attr('title');
 
-    //   if (href && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
-    //     break;
-    //   }
-    // });
+      if (href && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
+        break;
+      }
+    });
 
 
 
-    // if (!tvshowLink) return;
+    if (!tvshowLink) return;
 
-    // parser = client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
-    // let listEps = parser('.btn-eps');
+    parser = client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
+    let listEps = parser('.btn-eps');
 
-    // listEps.each(function() {
-    //   let eps = parser(this).text;
-    //   eps = exps.match(/episode *([0-9]+)/i);
+    listEps.each(function() {
+      let eps = parser(this).text;
+      eps = exps.match(/episode *([0-9]+)/i);
 
-    //   if (eps && eps == infoMovie.episode)  {
-    //     episodeLink.push(parser(this).href);
-    //   }
-    // });
+      if (eps && eps == infoMovie.episode)  {
+        episodeLink.push(parser(this).href);
+      }
+    });
 
-    // let arrPromise = episodeLink.map(async function(item) {
-    //   parserEmbed = client.request(item, 'GET'); 
+    let arrPromise = episodeLink.map(async function(item) {
+      parserEmbed = client.request(item, 'GET'); 
 
-    //   if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+      if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
-    //     let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
-    //     if (openloadLink) {
+        let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
+        if (openloadLink) {
 
-    //       let embed = await source.streamdor(trim(openloadLink[0]), item, true);
-    //       if (embed) {
+          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
+          if (embed) {
 
-    //         getDirect(embed, listDirect, callback);
-    //       }
-    //     }
-    //   } else {
+            getDirect(embed, listDirect, callback);
+          }
+        }
+      } else {
 
-    //     let embed = await source.streamdor(parserEmbed, item, false);
+        let embed = await source.streamdor(parserEmbed, item, false);
 
-    //     if(embed) {
+        if(embed) {
 
-    //       getDirect(embed, listDirect, callback);
-    //     }
+          getDirect(embed, listDirect, callback);
+        }
         
-    //   }
-    // });
+      }
+    });
 
-//   } catch(e) {
-//     console.log(String(e));
-//     return;
-//   }
-// };
+  } catch(e) {
+    console.log(String(e));
+    return;
+  }
+};
 
-// fhQa4JaHXqYgMdDQ = source;
