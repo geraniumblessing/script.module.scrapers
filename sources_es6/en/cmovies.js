@@ -150,12 +150,10 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
       }
     });
 
-    
-
-
+    console.log(tvshowLink, 'tvshowLink');
     if (!tvshowLink) console.log('not tvshow match'); return;
 
-    parser = libs.client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
+    parser = await libs.client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
     let listEps = parser('.btn-eps');
 
     console.log(listEps, 'lengthItemEps');

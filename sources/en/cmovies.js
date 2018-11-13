@@ -297,21 +297,109 @@ tvshow = function () {
               }
             });
 
+            console.log(tvshowLink, 'tvshowLink');
             if (!tvshowLink) console.log('not tvshow match');return _context6.abrupt('return');
 
-          case 20:
-            _context6.prev = 20;
+          case 15:
+            parser = _context6.sent;
+            listEps = parser('.btn-eps');
+
+
+            console.log(listEps, 'lengthItemEps');
+
+            listEps.each(function () {
+              var eps = parser(this).text;
+              eps = exps.match(/episode *([0-9]+)/i);
+
+              if (eps && eps == infoMovie.episode) {
+                episodeLink.push(parser(this).attr('href'));
+              }
+            });
+
+            console.log(episodeLink, 'episodeLink');
+
+            arrPromise = episodeLink.map(function () {
+              var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(item) {
+                var openloadLink, embed, _embed2;
+
+                return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                  while (1) {
+                    switch (_context5.prev = _context5.next) {
+                      case 0:
+                        _context5.next = 2;
+                        return libs.client.request(item, 'GET');
+
+                      case 2:
+                        parserEmbed = _context5.sent;
+
+                        if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+                          _context5.next = 12;
+                          break;
+                        }
+
+                        openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
+
+                        if (!openloadLink) {
+                          _context5.next = 10;
+                          break;
+                        }
+
+                        _context5.next = 8;
+                        return streamdor(libs, trim(openloadLink[0]), item, true);
+
+                      case 8:
+                        embed = _context5.sent;
+
+                        if (embed) {
+
+                          getDirect(embed, listDirect, callback);
+                        }
+
+                      case 10:
+                        _context5.next = 16;
+                        break;
+
+                      case 12:
+                        _context5.next = 14;
+                        return streamdor(libs, parserEmbed, item, false);
+
+                      case 14:
+                        _embed2 = _context5.sent;
+
+
+                        if (_embed2) {
+
+                          getDirect(_embed2, listDirect, callback);
+                        }
+
+                      case 16:
+                      case 'end':
+                        return _context5.stop();
+                    }
+                  }
+                }, _callee5, this);
+              }));
+
+              return function (_x17) {
+                return _ref6.apply(this, arguments);
+              };
+            }());
+            _context6.next = 27;
+            break;
+
+          case 23:
+            _context6.prev = 23;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 24:
+          case 27:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 20]]);
+    }, _callee6, undefined, [[0, 23]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
