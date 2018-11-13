@@ -297,10 +297,22 @@ tvshow = function () {
               }
             });
 
-            console.log(tvshowLink, 'tvshowLink');
-            if (!tvshowLink) console.log('not tvshow match');return _context6.abrupt('return');
+            if (tvshowLink) {
+              _context6.next = 13;
+              break;
+            }
 
-          case 15:
+            console.log('not tvshow match');
+            return _context6.abrupt('return');
+
+          case 13:
+
+            console.log(tvshowLink, 'tvshowLink');
+
+            _context6.next = 16;
+            return libs.client.request(tvshowLink + 'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
+
+          case 16:
             parser = _context6.sent;
             listEps = parser('.btn-eps');
 
@@ -384,22 +396,22 @@ tvshow = function () {
                 return _ref6.apply(this, arguments);
               };
             }());
-            _context6.next = 27;
+            _context6.next = 28;
             break;
 
-          case 23:
-            _context6.prev = 23;
+          case 24:
+            _context6.prev = 24;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 27:
+          case 28:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 23]]);
+    }, _callee6, undefined, [[0, 24]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
