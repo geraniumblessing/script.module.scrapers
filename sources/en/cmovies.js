@@ -236,7 +236,7 @@ movie = function () {
 
                         if (embed) {
 
-                          getDirect(embed, listDirect, callback);
+                          getDirect(libs, embed, listDirect, callback);
                         }
 
                       case 10:
@@ -253,7 +253,7 @@ movie = function () {
 
                         if (_embed) {
 
-                          getDirect(_embed, listDirect, callback);
+                          getDirect(libs, _embed, listDirect, callback);
                         }
 
                       case 16:
