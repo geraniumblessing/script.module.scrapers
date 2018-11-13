@@ -166,7 +166,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
     }
     let listEps = parserWatch('.btn-eps');
 
-    console.log(listEps, 'lengthItemEps');
+    console.log(listEps.length, 'lengthItemEps');
 
     listEps.each(function() {
       let eps = parserWatch(this).text();

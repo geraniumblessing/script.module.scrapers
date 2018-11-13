@@ -327,7 +327,7 @@ tvshow = function () {
             listEps = parserWatch('.btn-eps');
 
 
-            console.log(listEps, 'lengthItemEps');
+            console.log(listEps.length, 'lengthItemEps');
 
             listEps.each(function () {
               var eps = parserWatch(this).text();
