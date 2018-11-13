@@ -72,7 +72,7 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
       let title = parser(this).attr('title');
 
       if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
-        movieLink = parse(this).href;
+        movieLink = parse(this).attr('href');
       }
     });
 
@@ -85,12 +85,12 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
     let listEps = parser('.btn-eps');
 
     listEps.each(function() {
-        listLinks.push(parser(this).href);
+        listLinks.push(parser(this).attr('href'));
     });
 
     let arrPromise = listLinks.map(async (item) => {
 
-      let parserEmbed = libs.client.request(item, 'GET');
+      let parserEmbed = await libs.client.request(item, 'GET');
 
       if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
@@ -132,7 +132,6 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
 
     let parser = await libs.client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
-    console.log(parser, 'html');
 
     let listItem = parser('.ml-item');
 
@@ -142,29 +141,39 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
       
       const title = parser(this).attr('title');
 
-      if (href && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
-        tvshowLink = parser(this).href;
+      console.log(title, 'titleTvshow');
+
+      if (title && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
+
+      	console.log(title, 'titleAdd');
+        tvshowLink = parser(this).attr('href');
       }
     });
 
+    console.log(listItem, 'listItem')
 
 
-    if (!tvshowLink) return;
+
+    if (!tvshowLink) console.log('not tvshow match'); return;
 
     parser = libs.client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
     let listEps = parser('.btn-eps');
+
+    console.log(listEps, 'lengthItemEps');
 
     listEps.each(function() {
       let eps = parser(this).text;
       eps = exps.match(/episode *([0-9]+)/i);
 
       if (eps && eps == infoMovie.episode)  {
-        episodeLink.push(parser(this).href);
+        episodeLink.push(parser(this).attr('href'));
       }
     });
 
+    console.log(episodeLink, 'episodeLink');
+
     let arrPromise = episodeLink.map(async function(item) {
-      parserEmbed = libs.client.request(item, 'GET'); 
+      parserEmbed = await libs.client.request(item, 'GET'); 
 
       if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 

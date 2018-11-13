@@ -141,7 +141,7 @@ movie = function () {
               var title = parser(this).attr('title');
 
               if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
-                movieLink = parse(this).href;
+                movieLink = parse(this).attr('href');
               }
             });
 
@@ -171,7 +171,7 @@ movie = function () {
 
 
             listEps.each(function () {
-              listLinks.push(parser(this).href);
+              listLinks.push(parser(this).attr('href'));
             });
 
             arrPromise = listLinks.map(function () {
@@ -182,24 +182,28 @@ movie = function () {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
                       case 0:
-                        parserEmbed = libs.client.request(item, 'GET');
+                        _context3.next = 2;
+                        return libs.client.request(item, 'GET');
+
+                      case 2:
+                        parserEmbed = _context3.sent;
 
                         if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
-                          _context3.next = 10;
+                          _context3.next = 12;
                           break;
                         }
 
                         openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
 
                         if (!openloadLink) {
-                          _context3.next = 8;
+                          _context3.next = 10;
                           break;
                         }
 
-                        _context3.next = 6;
+                        _context3.next = 8;
                         return streamdor(libs, trim(openloadLink[0]), item, true);
 
-                      case 6:
+                      case 8:
                         embed = _context3.sent;
 
                         if (embed) {
@@ -207,15 +211,15 @@ movie = function () {
                           getDirect(embed, listDirect, callback);
                         }
 
-                      case 8:
-                        _context3.next = 14;
+                      case 10:
+                        _context3.next = 16;
                         break;
 
-                      case 10:
-                        _context3.next = 12;
+                      case 12:
+                        _context3.next = 14;
                         return streamdor(libs, parserEmbed, item, false);
 
-                      case 12:
+                      case 14:
                         _embed = _context3.sent;
 
 
@@ -224,7 +228,7 @@ movie = function () {
                           getDirect(_embed, listDirect, callback);
                         }
 
-                      case 14:
+                      case 16:
                       case 'end':
                         return _context3.stop();
                     }
@@ -275,10 +279,6 @@ tvshow = function () {
 
           case 6:
             parser = _context6.sent;
-
-
-            console.log(parser, 'html');
-
             listItem = parser('.ml-item');
 
 
@@ -288,111 +288,32 @@ tvshow = function () {
 
               var title = parser(this).attr('title');
 
-              if (href && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
-                tvshowLink = parser(this).href;
+              console.log(title, 'titleTvshow');
+
+              if (title && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
+
+                console.log(title, 'titleAdd');
+                tvshowLink = parser(this).attr('href');
               }
             });
 
-            if (tvshowLink) {
-              _context6.next = 13;
-              break;
-            }
+            console.log(listItem, 'listItem');
 
-            return _context6.abrupt('return');
+            if (!tvshowLink) console.log('not tvshow match');return _context6.abrupt('return');
 
-          case 13:
-
-            parser = libs.client.request(tvshowLink + 'watch', 'GET', {}, {}, false, '', '', '', 'dom');
-            listEps = parser('.btn-eps');
-
-
-            listEps.each(function () {
-              var eps = parser(this).text;
-              eps = exps.match(/episode *([0-9]+)/i);
-
-              if (eps && eps == infoMovie.episode) {
-                episodeLink.push(parser(this).href);
-              }
-            });
-
-            arrPromise = episodeLink.map(function () {
-              var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(item) {
-                var openloadLink, embed, _embed2;
-
-                return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                  while (1) {
-                    switch (_context5.prev = _context5.next) {
-                      case 0:
-                        parserEmbed = libs.client.request(item, 'GET');
-
-                        if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
-                          _context5.next = 10;
-                          break;
-                        }
-
-                        openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
-
-                        if (!openloadLink) {
-                          _context5.next = 8;
-                          break;
-                        }
-
-                        _context5.next = 6;
-                        return streamdor(libs, trim(openloadLink[0]), item, true);
-
-                      case 6:
-                        embed = _context5.sent;
-
-                        if (embed) {
-
-                          getDirect(embed, listDirect, callback);
-                        }
-
-                      case 8:
-                        _context5.next = 14;
-                        break;
-
-                      case 10:
-                        _context5.next = 12;
-                        return streamdor(libs, parserEmbed, item, false);
-
-                      case 12:
-                        _embed2 = _context5.sent;
-
-
-                        if (_embed2) {
-
-                          getDirect(_embed2, listDirect, callback);
-                        }
-
-                      case 14:
-                      case 'end':
-                        return _context5.stop();
-                    }
-                  }
-                }, _callee5, this);
-              }));
-
-              return function (_x17) {
-                return _ref6.apply(this, arguments);
-              };
-            }());
-            _context6.next = 23;
-            break;
-
-          case 19:
-            _context6.prev = 19;
+          case 21:
+            _context6.prev = 21;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 23:
+          case 25:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 19]]);
+    }, _callee6, undefined, [[0, 21]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
