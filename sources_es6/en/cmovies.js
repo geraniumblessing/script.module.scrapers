@@ -117,6 +117,7 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
     await Promise.all(arrPromise);
     return;
   } catch(e) {
+    console.log(String(e));
     return;
   }
 };
@@ -208,6 +209,8 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
         
       }
     });
+    await Promise.all(arrPromise);
+    return;
 
   } catch(e) {
     console.log(String(e));

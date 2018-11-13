@@ -249,9 +249,11 @@ movie = function () {
           case 26:
             _context4.prev = 26;
             _context4.t0 = _context4['catch'](0);
+
+            console.log(String(_context4.t0));
             return _context4.abrupt('return');
 
-          case 29:
+          case 30:
           case 'end':
             return _context4.stop();
         }
@@ -411,22 +413,25 @@ tvshow = function () {
                 return _ref6.apply(this, arguments);
               };
             }());
-            _context6.next = 31;
-            break;
+            _context6.next = 27;
+            return Promise.all(arrPromise);
 
           case 27:
-            _context6.prev = 27;
+            return _context6.abrupt('return');
+
+          case 30:
+            _context6.prev = 30;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 31:
+          case 34:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 27]]);
+    }, _callee6, undefined, [[0, 30]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
