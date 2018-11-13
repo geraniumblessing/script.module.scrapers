@@ -203,11 +203,11 @@ let host = {
 	embed : embed
 };
 
-host.host = async (embed, listDirect, callback) => {
+host.host = async (libs, embed, listDirect, callback) => {
 
 	try {
 
-		let parser = await client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
+		let parser = await libs.client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
 
 		if (!parser) return;
 

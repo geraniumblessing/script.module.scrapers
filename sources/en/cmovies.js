@@ -13,7 +13,7 @@ source = {
 };
 
 var streamdor = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(html, src, olod) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, html, src, olod) {
     var episodeId, findEmbed;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -30,7 +30,7 @@ var streamdor = function () {
 
           case 3:
             _context.next = 5;
-            return client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, { 'Referer': src });
+            return libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, { 'Referer': src });
 
           case 5:
             parserEpisode = _context.sent;
@@ -83,12 +83,12 @@ var streamdor = function () {
     }, _callee, undefined);
   }));
 
-  return function streamdor(_x, _x2, _x3) {
+  return function streamdor(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
   };
 }();
 
-var getEmbed = function () {
+getSource = function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url) {
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -104,12 +104,12 @@ var getEmbed = function () {
     }, _callee2, undefined);
   }));
 
-  return function getEmbed(_x4) {
+  return function getSource(_x5) {
     return _ref2.apply(this, arguments);
   };
 }();
-var movie = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(infoMovie, listDirect, getDirect, callback) {
+movie = function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(libs, infoMovie, listDirect, getDirect, callback) {
     var movieLink, listLink, searchLink, parser, listItem, listEps, arrPromise;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
@@ -120,7 +120,7 @@ var movie = function () {
             listLink = [];
             searchLink = source.search_link + infoMovie.title + "+" + infoMovie.year;
             _context4.next = 6;
-            return client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
+            return libs.client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
           case 6:
             parser = _context4.sent;
@@ -154,7 +154,7 @@ var movie = function () {
 
           case 13:
             _context4.next = 15;
-            return client.request(movieLink + "watch", 'GET', {}, {}, false, '', '', '', 'dom');
+            return libs.client.request(movieLink + "watch", 'GET', {}, {}, false, '', '', '', 'dom');
 
           case 15:
             parser = _context4.sent;
@@ -182,7 +182,7 @@ var movie = function () {
                   while (1) {
                     switch (_context3.prev = _context3.next) {
                       case 0:
-                        parserEmbed = client.request(item, 'GET');
+                        parserEmbed = libs.client.request(item, 'GET');
 
                         if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
                           _context3.next = 10;
@@ -197,7 +197,7 @@ var movie = function () {
                         }
 
                         _context3.next = 6;
-                        return source.streamdor(trim(openloadLink[0]), item, true);
+                        return streamdor(libs, trim(openloadLink[0]), item, true);
 
                       case 6:
                         embed = _context3.sent;
@@ -213,7 +213,7 @@ var movie = function () {
 
                       case 10:
                         _context3.next = 12;
-                        return source.streamdor(parserEmbed, item, false);
+                        return streamdor(libs, parserEmbed, item, false);
 
                       case 12:
                         _embed = _context3.sent;
@@ -232,7 +232,7 @@ var movie = function () {
                 }, _callee3, undefined);
               }));
 
-              return function (_x9) {
+              return function (_x11) {
                 return _ref4.apply(this, arguments);
               };
             }());
@@ -255,12 +255,12 @@ var movie = function () {
     }, _callee4, undefined, [[0, 26]]);
   }));
 
-  return function movie(_x5, _x6, _x7, _x8) {
+  return function movie(_x6, _x7, _x8, _x9, _x10) {
     return _ref3.apply(this, arguments);
   };
 }();
-var tvshow = function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(infoMovie, listDirect, getDirect, callback) {
+tvshow = function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(libs, infoMovie, listDirect, getDirect, callback) {
     var tvshowLink, episodeLink, searchText, parser, listItem, listEps, arrPromise;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
@@ -270,15 +270,10 @@ var tvshow = function () {
             tvshowLink = '';
             episodeLink = [];
             searchText = infoMovie.title + ' season ' + infoMovie.season;
+            _context6.next = 6;
+            return libs.client.request(source.search_link + searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
-
-            console.log('info', infoMovie, listDirect, getDirect, callback);
-            console.log(searchText, 'textSearch');
-
-            _context6.next = 8;
-            return client.request(source.search_link + searchText, 'GET', {}, {}, false, '', '', '', 'dom');
-
-          case 8:
+          case 6:
             parser = _context6.sent;
 
 
@@ -299,15 +294,15 @@ var tvshow = function () {
             });
 
             if (tvshowLink) {
-              _context6.next = 15;
+              _context6.next = 13;
               break;
             }
 
             return _context6.abrupt('return');
 
-          case 15:
+          case 13:
 
-            parser = client.request(tvshowLink + 'watch', 'GET', {}, {}, false, '', '', '', 'dom');
+            parser = libs.client.request(tvshowLink + 'watch', 'GET', {}, {}, false, '', '', '', 'dom');
             listEps = parser('.btn-eps');
 
 
@@ -328,7 +323,7 @@ var tvshow = function () {
                   while (1) {
                     switch (_context5.prev = _context5.next) {
                       case 0:
-                        parserEmbed = client.request(item, 'GET');
+                        parserEmbed = libs.client.request(item, 'GET');
 
                         if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
                           _context5.next = 10;
@@ -343,7 +338,7 @@ var tvshow = function () {
                         }
 
                         _context5.next = 6;
-                        return source.streamdor(trim(openloadLink[0]), item, true);
+                        return streamdor(libs, trim(openloadLink[0]), item, true);
 
                       case 6:
                         embed = _context5.sent;
@@ -359,7 +354,7 @@ var tvshow = function () {
 
                       case 10:
                         _context5.next = 12;
-                        return source.streamdor(parserEmbed, item, false);
+                        return streamdor(libs, parserEmbed, item, false);
 
                       case 12:
                         _embed2 = _context5.sent;
@@ -378,29 +373,29 @@ var tvshow = function () {
                 }, _callee5, this);
               }));
 
-              return function (_x14) {
+              return function (_x17) {
                 return _ref6.apply(this, arguments);
               };
             }());
-            _context6.next = 25;
+            _context6.next = 23;
             break;
 
-          case 21:
-            _context6.prev = 21;
+          case 19:
+            _context6.prev = 19;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 25:
+          case 23:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 21]]);
+    }, _callee6, undefined, [[0, 19]]);
   }));
 
-  return function tvshow(_x10, _x11, _x12, _x13) {
+  return function tvshow(_x12, _x13, _x14, _x15, _x16) {
     return _ref5.apply(this, arguments);
   };
 }();

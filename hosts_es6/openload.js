@@ -7,11 +7,11 @@ let host = {
 	api_get_direct: 'http://localhost:8889/v1/openload/get'
 };
 
-host.host = async (embed, listDirect, callback) => {
+host.host = async (libs, embed, listDirect, callback) => {
 	try {
 
-		let parser = await client.request(embed, 'GET');
-		let direct = await client.request(host.api_get_direct, 'POST', {
+		let parser = await libs.client.request(embed, 'GET');
+		let direct = await libs.client.request(host.api_get_direct, 'POST', {
 			'data': parser
 		});
 		direct = JSON.parse(direct);

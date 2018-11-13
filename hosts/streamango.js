@@ -151,7 +151,7 @@ var host = {
 };
 
 host.host = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(embed, listDirect, callback) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, embed, listDirect, callback) {
     var parser, script, match, sources, srces, item, result;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -159,7 +159,7 @@ host.host = function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
+            return libs.client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
 
           case 3:
             parser = _context.sent;
@@ -238,7 +238,7 @@ host.host = function () {
     }, _callee, undefined, [[0, 25]]);
   }));
 
-  return function (_x, _x2, _x3) {
+  return function (_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
   };
 }();

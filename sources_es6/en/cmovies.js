@@ -11,13 +11,13 @@ source = {
 	search_link : 'https://cmovieshd.net/search/?q='
 };
 
-const streamdor = async (html, src, olod)  => {
+const streamdor = async (libs, html, src, olod)  => {
 
   let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
   if (!episodeId) return;
 
-  parserEpisode = await client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
+  parserEpisode = await libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
   parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
   parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
   parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
@@ -52,10 +52,10 @@ const streamdor = async (html, src, olod)  => {
 
 }
 
-const getEmbed = async (url) => {
+getSource = async (url) => {
   return;
 };
-const movie = async (infoMovie, listDirect, getDirect, callback)  => {
+movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
   try {
 
     let movieLink = '';
@@ -63,7 +63,7 @@ const movie = async (infoMovie, listDirect, getDirect, callback)  => {
 
 
     let searchLink = source.search_link + infoMovie.title + "+" +infoMovie.year;
-    let parser = await client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
+    let parser = await libs.client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
     if (!parser) return;
 
@@ -81,7 +81,7 @@ const movie = async (infoMovie, listDirect, getDirect, callback)  => {
 
     if (movieLink == '') return;
 
-    parser = await client.request(movieLink+"watch", 'GET', {}, {}, false, '' ,'' ,'' ,'dom');
+    parser = await libs.client.request(movieLink+"watch", 'GET', {}, {}, false, '' ,'' ,'' ,'dom');
 
     if (!parser) return;
 
@@ -93,14 +93,14 @@ const movie = async (infoMovie, listDirect, getDirect, callback)  => {
 
     let arrPromise = listLinks.map(async (item) => {
 
-      let parserEmbed = client.request(item, 'GET');
+      let parserEmbed = libs.client.request(item, 'GET');
 
       if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
         let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
-          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
+          let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
           if (embed) {
 
             getDirect(embed, listDirect, callback);
@@ -108,7 +108,7 @@ const movie = async (infoMovie, listDirect, getDirect, callback)  => {
         }
       } else {
 
-        let embed = await source.streamdor(parserEmbed, item, false);
+        let embed = await streamdor(libs, parserEmbed, item, false);
 
         if(embed) {
 
@@ -123,7 +123,7 @@ const movie = async (infoMovie, listDirect, getDirect, callback)  => {
     return;
   }
 };
-const tvshow = async (infoMovie, listDirect, getDirect, callback) => {
+tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
 
   try {
 
@@ -132,10 +132,8 @@ const tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 
     let searchText = infoMovie.title + ' season ' + infoMovie.season;
     
-    console.log('info', infoMovie, listDirect, getDirect, callback); 
-    console.log(searchText, 'textSearch'); 
 
-    let parser = await client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
+    let parser = await libs.client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
     console.log(parser, 'html');
 
@@ -156,7 +154,7 @@ const tvshow = async (infoMovie, listDirect, getDirect, callback) => {
 
     if (!tvshowLink) return;
 
-    parser = client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
+    parser = libs.client.request(tvshowLink+'watch', 'GET', {}, {}, false, '', '', '', 'dom');
     let listEps = parser('.btn-eps');
 
     listEps.each(function() {
@@ -169,14 +167,14 @@ const tvshow = async (infoMovie, listDirect, getDirect, callback) => {
     });
 
     let arrPromise = episodeLink.map(async function(item) {
-      parserEmbed = client.request(item, 'GET'); 
+      parserEmbed = libs.client.request(item, 'GET'); 
 
       if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
         let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
-          let embed = await source.streamdor(trim(openloadLink[0]), item, true);
+          let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
           if (embed) {
 
             getDirect(embed, listDirect, callback);
@@ -184,7 +182,7 @@ const tvshow = async (infoMovie, listDirect, getDirect, callback) => {
         }
       } else {
 
-        let embed = await source.streamdor(parserEmbed, item, false);
+        let embed = await streamdor(libs, parserEmbed, item, false);
 
         if(embed) {
 
