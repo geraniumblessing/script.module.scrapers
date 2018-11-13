@@ -1,5 +1,5 @@
-./hosts_es6
-./sources_es6
+hosts_es6
+sources_es6
 ./node_modules
 ./build.js
 ./package.json

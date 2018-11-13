@@ -141,7 +141,7 @@ movie = function () {
               var title = parser(this).attr('title');
 
               if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
-                movieLink = parse(this).href;
+                movieLink = parse(this).attr('href');
               }
             });
 
@@ -171,7 +171,7 @@ movie = function () {
 
 
             listEps.each(function () {
-              listLinks.push(parser(this).href);
+              listLinks.push(parser(this).attr('href'));
             });
 
             arrPromise = listLinks.map(function () {
@@ -275,32 +275,26 @@ tvshow = function () {
 
           case 6:
             parser = _context6.sent;
-
-
-            console.log(parser, 'html');
-
             listItem = parser('.ml-item');
 
-
-            console.log(listItem.length, 'lengthItem');
 
             listItem.each(function () {
 
               var title = parser(this).attr('title');
 
-              if (href && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
-                tvshowLink = parser(this).href;
+              if (title && title.toLowerCase().replace(/\W+/ig, '') == (infoMovie.title + " - season " + infoMovie.season).toLowerCase().replace(/\W+/ig, '')) {
+                tvshowLink = parser(this).attr('href');
               }
             });
 
             if (tvshowLink) {
-              _context6.next = 13;
+              _context6.next = 11;
               break;
             }
 
             return _context6.abrupt('return');
 
-          case 13:
+          case 11:
 
             parser = libs.client.request(tvshowLink + 'watch', 'GET', {}, {}, false, '', '', '', 'dom');
             listEps = parser('.btn-eps');
@@ -311,7 +305,7 @@ tvshow = function () {
               eps = exps.match(/episode *([0-9]+)/i);
 
               if (eps && eps == infoMovie.episode) {
-                episodeLink.push(parser(this).href);
+                episodeLink.push(parser(this).attr('href'));
               }
             });
 
@@ -377,22 +371,22 @@ tvshow = function () {
                 return _ref6.apply(this, arguments);
               };
             }());
-            _context6.next = 23;
+            _context6.next = 21;
             break;
 
-          case 19:
-            _context6.prev = 19;
+          case 17:
+            _context6.prev = 17;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 23:
+          case 21:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 19]]);
+    }, _callee6, undefined, [[0, 17]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
