@@ -279,7 +279,7 @@ tvshow = function () {
 
           case 6:
             parser = _context6.sent;
-            listItem = parser('a..ml-mask');
+            listItem = parser('a.ml-mask');
 
 
             console.log(listItem.length, 'lengthItem');
