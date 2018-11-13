@@ -54,7 +54,7 @@ const streamdor = async (libs, html, src, olod)  => {
 
     return detail = {
       'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'], 
-      'info': '', direct: false, 'debridonly': False
+      'info': '', direct: false, 'debridonly': false
     };
 
   }
@@ -62,7 +62,7 @@ const streamdor = async (libs, html, src, olod)  => {
   if (olod) {
     return {
       'source': 'openload.co', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
-      'info': '', direct: false, 'debridonly': False
+      'info': '', direct: false, 'debridonly': false
     };
   }
   return false;
