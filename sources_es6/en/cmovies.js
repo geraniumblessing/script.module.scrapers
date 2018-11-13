@@ -164,7 +164,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
     console.log(listEps, 'lengthItemEps');
 
     listEps.each(function() {
-      let eps = parser(this).text;
+      let eps = parser(this).text();
       eps = exps.match(/episode *([0-9]+)/i);
 
       if (eps && eps == infoMovie.episode)  {

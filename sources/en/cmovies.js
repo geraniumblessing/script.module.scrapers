@@ -320,7 +320,7 @@ tvshow = function () {
             console.log(listEps, 'lengthItemEps');
 
             listEps.each(function () {
-              var eps = parser(this).text;
+              var eps = parser(this).text();
               eps = exps.match(/episode *([0-9]+)/i);
 
               if (eps && eps == infoMovie.episode) {
