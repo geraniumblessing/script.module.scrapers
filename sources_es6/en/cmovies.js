@@ -133,7 +133,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
     let parser = await libs.client.request(source.search_link+searchText, 'GET', {}, {}, false, '', '', '', 'dom');
 
 
-    let listItem = parser('.ml-item');
+    let listItem = parser('a..ml-mask');
 
     console.log(listItem.length, 'lengthItem');
 
