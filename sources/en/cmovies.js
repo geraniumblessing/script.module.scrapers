@@ -265,7 +265,7 @@ movie = function () {
 }();
 tvshow = function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(libs, infoMovie, listDirect, getDirect, callback) {
-    var tvshowLink, episodeLink, searchText, parser, listItem, listEps, arrPromise;
+    var tvshowLink, episodeLink, searchText, parser, listItem, parserWatch, listEps, arrPromise;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
@@ -313,9 +313,9 @@ tvshow = function () {
             return libs.client.request(tvshowLink + 'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
 
           case 16:
-            parser = _context6.sent;
+            parserWatch = _context6.sent;
 
-            if (parser) {
+            if (parserWatch) {
               _context6.next = 20;
               break;
             }
@@ -324,17 +324,17 @@ tvshow = function () {
             return _context6.abrupt('return');
 
           case 20:
-            listEps = parser('.btn-eps');
+            listEps = parserWatch('.btn-eps');
 
 
             console.log(listEps, 'lengthItemEps');
 
             listEps.each(function () {
-              var eps = parser(this).text();
+              var eps = parserWatch(this).text();
               eps = exps.match(/episode *([0-9]+)/i);
 
               if (eps && eps == infoMovie.episode) {
-                episodeLink.push(parser(this).attr('href'));
+                episodeLink.push(parserWatch(this).attr('href'));
               }
             });
 

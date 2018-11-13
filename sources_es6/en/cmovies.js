@@ -158,22 +158,22 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
 
     console.log(tvshowLink, 'tvshowLink');
 
-    parser = await libs.client.request(tvshowLink+'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
+    let parserWatch = await libs.client.request(tvshowLink+'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
 
-    if (!parser) {
+    if (!parserWatch) {
       console.log('error when get link watch', tvshowLink+'watch/');
       return;
     }
-    let listEps = parser('.btn-eps');
+    let listEps = parserWatch('.btn-eps');
 
     console.log(listEps, 'lengthItemEps');
 
     listEps.each(function() {
-      let eps = parser(this).text();
+      let eps = parserWatch(this).text();
       eps = exps.match(/episode *([0-9]+)/i);
 
       if (eps && eps == infoMovie.episode)  {
-        episodeLink.push(parser(this).attr('href'));
+        episodeLink.push(parserWatch(this).attr('href'));
       }
     });
 
