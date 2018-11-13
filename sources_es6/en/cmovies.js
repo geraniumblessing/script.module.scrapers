@@ -18,8 +18,8 @@ const streamdor = async (libs, html, src, olod)  => {
   parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
   parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
   parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
-  parserEpisode = base64.decode(parserEpisode);
-  parserEpisode = aes(parserEpisode);
+  parserEpisode = libs.base64.decode(parserEpisode);
+  parserEpisode = libs.aes(parserEpisode);
   
 
   qual = parserEpisode.match(/label:"(.*?)"/i);
@@ -156,10 +156,9 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
       return;
     }
 
+    let parserWatch = await libs.client.request(tvshowLink+'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
 
-    tvshowLink += 'watch/';
-
-    let parserWatch = await libs.client.request(tvshowLink, 'GET', {}, {}, false, '', '', '', 'dom');
+    console.log(parserWatch);
 
     if (!parserWatch) {
       console.log('error when get link watch', tvshowLink);

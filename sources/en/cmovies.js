@@ -38,8 +38,8 @@ var streamdor = function () {
             parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
             parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
             parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
-            parserEpisode = base64.decode(parserEpisode);
-            parserEpisode = aes(parserEpisode);
+            parserEpisode = libs.base64.decode(parserEpisode);
+            parserEpisode = libs.aes(parserEpisode);
 
             qual = parserEpisode.match(/label:"(.*?)"/i);
 
@@ -306,14 +306,14 @@ tvshow = function () {
             return _context6.abrupt('return');
 
           case 13:
+            _context6.next = 15;
+            return libs.client.request(tvshowLink + 'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
 
-            tvshowLink += 'watch/';
-
-            _context6.next = 16;
-            return libs.client.request(tvshowLink, 'GET', {}, {}, false, '', '', '', 'dom');
-
-          case 16:
+          case 15:
             parserWatch = _context6.sent;
+
+
+            console.log(parserWatch);
 
             if (parserWatch) {
               _context6.next = 20;
