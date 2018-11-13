@@ -314,6 +314,16 @@ tvshow = function () {
 
           case 16:
             parser = _context6.sent;
+
+            if (parser) {
+              _context6.next = 20;
+              break;
+            }
+
+            console.log('error when get link watch', tvshowLink + 'watch/');
+            return _context6.abrupt('return');
+
+          case 20:
             listEps = parser('.btn-eps');
 
 
@@ -396,22 +406,22 @@ tvshow = function () {
                 return _ref6.apply(this, arguments);
               };
             }());
-            _context6.next = 28;
+            _context6.next = 31;
             break;
 
-          case 24:
-            _context6.prev = 24;
+          case 27:
+            _context6.prev = 27;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 28:
+          case 31:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 24]]);
+    }, _callee6, undefined, [[0, 27]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
