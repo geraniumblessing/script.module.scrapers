@@ -242,5 +242,3 @@ host.host = function () {
     return _ref.apply(this, arguments);
   };
 }();
-
-WmrBLZZdx2UN26Sq = host;
