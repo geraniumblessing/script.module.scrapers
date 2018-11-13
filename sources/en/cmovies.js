@@ -331,9 +331,9 @@ tvshow = function () {
 
             listEps.each(function () {
               var eps = parserWatch(this).text();
-              eps = exps.match(/episode *([0-9]+)/i);
+              eps = eps.match(/episode *([0-9]+)/i);
 
-              if (eps && eps == infoMovie.episode) {
+              if (eps && eps[1] == infoMovie.episode) {
                 episodeLink.push(parserWatch(this).attr('href'));
               }
             });
@@ -348,28 +348,31 @@ tvshow = function () {
                   while (1) {
                     switch (_context5.prev = _context5.next) {
                       case 0:
-                        _context5.next = 2;
+
+                        console.log(item, 'embed');
+                        _context5.next = 3;
                         return libs.client.request(item, 'GET');
 
-                      case 2:
+                      case 3:
                         parserEmbed = _context5.sent;
 
-                        if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+                        if (!parseEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
+                          _context5.next = 14;
+                          break;
+                        }
+
+                        openloadLink = parseEmbed.match(/http.+\:\/\/openload.co\/embed\/.+\"/ig);
+
+                        if (!openloadLink) {
                           _context5.next = 12;
                           break;
                         }
 
-                        openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
-
-                        if (!openloadLink) {
-                          _context5.next = 10;
-                          break;
-                        }
-
-                        _context5.next = 8;
+                        console.log(openloadLink[0], 'parserEmbed');
+                        _context5.next = 10;
                         return streamdor(libs, trim(openloadLink[0]), item, true);
 
-                      case 8:
+                      case 10:
                         embed = _context5.sent;
 
                         if (embed) {
@@ -377,15 +380,17 @@ tvshow = function () {
                           getDirect(embed, listDirect, callback);
                         }
 
-                      case 10:
-                        _context5.next = 16;
+                      case 12:
+                        _context5.next = 19;
                         break;
 
-                      case 12:
-                        _context5.next = 14;
+                      case 14:
+
+                        console.log('get embed');
+                        _context5.next = 17;
                         return streamdor(libs, parserEmbed, item, false);
 
-                      case 14:
+                      case 17:
                         _embed2 = _context5.sent;
 
 
@@ -394,7 +399,7 @@ tvshow = function () {
                           getDirect(_embed2, listDirect, callback);
                         }
 
-                      case 16:
+                      case 19:
                       case 'end':
                         return _context5.stop();
                     }
