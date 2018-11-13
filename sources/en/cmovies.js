@@ -66,24 +66,21 @@ var streamdor = function () {
             return _context.abrupt('return', false);
 
           case 9:
-
-            findEmbed = JSON.parse(findEmbed);
-
             if (!(findEmbed['status'] == 0)) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
 
             return _context.abrupt('return', false);
 
-          case 12:
+          case 11:
 
             // let findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
 
             console.log(findEmbed, 'findEmbed');
 
             if (!findEmbed) {
-              _context.next = 15;
+              _context.next = 14;
               break;
             }
 
@@ -92,9 +89,9 @@ var streamdor = function () {
               'info': '', direct: false, 'debridonly': False
             });
 
-          case 15:
+          case 14:
             if (!olod) {
-              _context.next = 17;
+              _context.next = 16;
               break;
             }
 
@@ -103,10 +100,10 @@ var streamdor = function () {
               'info': '', direct: false, 'debridonly': False
             });
 
-          case 17:
+          case 16:
             return _context.abrupt('return', false);
 
-          case 18:
+          case 17:
           case 'end':
             return _context.stop();
         }
@@ -414,25 +411,24 @@ tvshow = function () {
                         }
 
                       case 12:
-                        _context5.next = 19;
+                        _context5.next = 18;
                         break;
 
                       case 14:
-
-                        console.log('get embed');
-                        _context5.next = 17;
+                        _context5.next = 16;
                         return streamdor(libs, parserEmbed, item, false);
 
-                      case 17:
+                      case 16:
                         _embed2 = _context5.sent;
 
 
                         if (_embed2) {
 
+                          console.log(_embed2, 'get embed');
                           getDirect(_embed2, listDirect, callback);
                         }
 
-                      case 19:
+                      case 18:
                       case 'end':
                         return _context5.stop();
                     }

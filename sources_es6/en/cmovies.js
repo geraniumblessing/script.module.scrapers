@@ -41,7 +41,6 @@ const streamdor = async (libs, html, src, olod)  => {
 
   if (!findEmbed) return false;
 
-  findEmbed = JSON.parse(findEmbed);
 
   if (findEmbed['status'] == 0) return false;
 
@@ -220,11 +219,12 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
         }
       } else {
 
-        console.log('get embed');
+        
         let embed = await streamdor(libs, parserEmbed, item, false);
 
         if(embed) {
 
+          console.log(embed, 'get embed');
           getDirect(embed, listDirect, callback);
         }
         
