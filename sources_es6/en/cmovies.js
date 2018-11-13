@@ -12,7 +12,11 @@ const streamdor = async (libs, html, src, olod)  => {
 
   let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
+  console.log(episodeId, 'episodeId');
+
   if (!episodeId) return;
+
+  console.log('https://embed.streamdor.co/video/' + episodeId[0], 'linkemBed');
 
   parserEpisode = await libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
   parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
@@ -29,6 +33,7 @@ const streamdor = async (libs, html, src, olod)  => {
 
   let findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
 
+  console.log(findEmbed, 'findEmbed');
 
   if (findEmbed) {
 
