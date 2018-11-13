@@ -407,7 +407,7 @@ tvshow = function () {
 
                         if (embed) {
 
-                          getDirect(embed, listDirect, callback);
+                          getDirect(libs, embed, listDirect, callback);
                         }
 
                       case 12:
@@ -425,7 +425,7 @@ tvshow = function () {
                         if (_embed2) {
 
                           console.log(_embed2, 'get embed');
-                          getDirect(_embed2, listDirect, callback);
+                          getDirect(libs, _embed2, listDirect, callback);
                         }
 
                       case 18:

@@ -214,7 +214,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
           let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
           if (embed) {
 
-            getDirect(embed, listDirect, callback);
+            getDirect(libs, embed, listDirect, callback);
           }
         }
       } else {
@@ -225,7 +225,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
         if(embed) {
 
           console.log(embed, 'get embed');
-          getDirect(embed, listDirect, callback);
+          getDirect(libs, embed, listDirect, callback);
         }
         
       }
