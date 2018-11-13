@@ -14,65 +14,87 @@ source = {
 
 var streamdor = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, html, src, olod) {
-    var episodeId, findEmbed;
+    var episodeId, qual, findEmbed;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
-
-
-            console.log(episodeId, 'episodeId');
+            episodeId = html.match(/https\:\/\/api\.streamdor\.co\/load_player\.html\?e\=([A-z0-9]+)/i);
 
             if (episodeId) {
-              _context.next = 4;
+              _context.next = 3;
               break;
             }
 
             return _context.abrupt('return');
 
-          case 4:
+          case 3:
 
-            console.log('https://embed.streamdor.co/video/' + episodeId[0], 'linkemBed');
+            // let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
-            _context.next = 7;
-            return libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, { 'Referer': src });
+            // console.log(episodeId, 'episodeId');
 
-          case 7:
-            parserEpisode = _context.sent;
+            // if (!episodeId) return;
 
-            parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
-            parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
-            parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
-            parserEpisode = libs.base64.decode(parserEpisode);
-            parserEpisode = libs.aes(parserEpisode);
+            // console.log('https://embed.streamdor.co/video/' + episodeId[0], 'linkemBed');
 
-            qual = parserEpisode.match(/label:"(.*?)"/i);
+            // parserEpisode = await libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
+            // parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
+            // parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
+            // parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
+            // parserEpisode = libs.base64.decode(parserEpisode);
+            // parserEpisode = libs.aes(parserEpisode);
 
-            if (qual) {
-              qual = qual[0];
-            } else {
-              qual = 'SD';
+
+            // qual = parserEpisode.match(/label:"(.*?)"/i);
+
+            // if (qual) {qual = qual[0];}
+            // else {qual = 'SD';}
+
+            qual = 'SD';
+            _context.next = 6;
+            return libs.client.request('https://api.streamdor.co/episode/embed/' + episodeId[1], 'GET');
+
+          case 6:
+            findEmbed = _context.sent;
+
+            if (findEmbed) {
+              _context.next = 9;
+              break;
             }
 
-            findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
+            return _context.abrupt('return', false);
 
+          case 9:
+
+            findEmbed = JSON.parse(findEmbed);
+
+            if (!(findEmbed['status'] == 0)) {
+              _context.next = 12;
+              break;
+            }
+
+            return _context.abrupt('return', false);
+
+          case 12:
+
+            // let findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
 
             console.log(findEmbed, 'findEmbed');
 
             if (!findEmbed) {
-              _context.next = 19;
+              _context.next = 15;
               break;
             }
 
             return _context.abrupt('return', detail = {
-              'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed[0],
+              'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'],
               'info': '', direct: false, 'debridonly': False
             });
 
-          case 19:
+          case 15:
             if (!olod) {
-              _context.next = 21;
+              _context.next = 17;
               break;
             }
 
@@ -81,10 +103,10 @@ var streamdor = function () {
               'info': '', direct: false, 'debridonly': False
             });
 
-          case 21:
+          case 17:
             return _context.abrupt('return', false);
 
-          case 22:
+          case 18:
           case 'end':
             return _context.stop();
         }

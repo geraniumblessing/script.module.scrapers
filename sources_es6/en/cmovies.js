@@ -10,35 +10,51 @@ source = {
 
 const streamdor = async (libs, html, src, olod)  => {
 
-  let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
-
-  console.log(episodeId, 'episodeId');
+  let episodeId = html.match(/https\:\/\/api\.streamdor\.co\/load_player\.html\?e\=([A-z0-9]+)/i);
 
   if (!episodeId) return;
 
-  console.log('https://embed.streamdor.co/video/' + episodeId[0], 'linkemBed');
+  // let episodeId = html.match(/.*streamdor\.co\/video\/(\d+)/ig);
 
-  parserEpisode = await libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
-  parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
-  parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
-  parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
-  parserEpisode = libs.base64.decode(parserEpisode);
-  parserEpisode = libs.aes(parserEpisode);
+  // console.log(episodeId, 'episodeId');
+
+  // if (!episodeId) return;
+
+  // console.log('https://embed.streamdor.co/video/' + episodeId[0], 'linkemBed');
+
+  // parserEpisode = await libs.client.request('https://embed.streamdor.co/video/' + episodeId[0], 'GET', {}, {'Referer': src});
+  // parserEpisode = parserEpisode.match(/JuicyCodes\.Run\(([^\)]+)/i);
+  // parserEpisode = parserEpisode.replace(/\"\s*\+\s*\"/ig, '');
+  // parserEpisode = parserEpisode.replace(/[^A-Za-z0-9+\\/=]/i, '');
+  // parserEpisode = libs.base64.decode(parserEpisode);
+  // parserEpisode = libs.aes(parserEpisode);
   
 
-  qual = parserEpisode.match(/label:"(.*?)"/i);
+  // qual = parserEpisode.match(/label:"(.*?)"/i);
 
-  if (qual) {qual = qual[0];}
-  else {qual = 'SD';}
+  // if (qual) {qual = qual[0];}
+  // else {qual = 'SD';}
 
-  let findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
+  let qual = 'SD';
+
+  let findEmbed = await libs.client.request('https://api.streamdor.co/episode/embed/'+episodeId[1], 'GET');
+
+  if (!findEmbed) return false;
+
+  findEmbed = JSON.parse(findEmbed);
+
+  if (findEmbed['status'] == 0) return false;
+
+
+
+  // let findEmbed = parserEpisode.match(/(https\:\/\/streamango\.com\/embed\/.*?)/i);
 
   console.log(findEmbed, 'findEmbed');
 
   if (findEmbed) {
 
     return detail = {
-      'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
+      'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'], 
       'info': '', direct: false, 'debridonly': False
     };
 
