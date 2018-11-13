@@ -150,8 +150,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
       }
     });
 
-    console.log(listItem, 'listItem')
-
+    
 
 
     if (!tvshowLink) console.log('not tvshow match'); return;

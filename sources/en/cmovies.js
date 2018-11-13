@@ -297,23 +297,21 @@ tvshow = function () {
               }
             });
 
-            console.log(listItem, 'listItem');
-
             if (!tvshowLink) console.log('not tvshow match');return _context6.abrupt('return');
 
-          case 21:
-            _context6.prev = 21;
+          case 20:
+            _context6.prev = 20;
             _context6.t0 = _context6['catch'](0);
 
             console.log(String(_context6.t0));
             return _context6.abrupt('return');
 
-          case 25:
+          case 24:
           case 'end':
             return _context6.stop();
         }
       }
-    }, _callee6, undefined, [[0, 21]]);
+    }, _callee6, undefined, [[0, 20]]);
   }));
 
   return function tvshow(_x12, _x13, _x14, _x15, _x16) {
