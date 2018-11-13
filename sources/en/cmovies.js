@@ -307,10 +307,10 @@ tvshow = function () {
 
           case 13:
 
-            console.log(tvshowLink, 'tvshowLink');
+            tvshowLink += 'watch/';
 
             _context6.next = 16;
-            return libs.client.request(tvshowLink + 'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
+            return libs.client.request(tvshowLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
           case 16:
             parserWatch = _context6.sent;
@@ -320,7 +320,7 @@ tvshow = function () {
               break;
             }
 
-            console.log('error when get link watch', tvshowLink + 'watch/');
+            console.log('error when get link watch', tvshowLink);
             return _context6.abrupt('return');
 
           case 20:

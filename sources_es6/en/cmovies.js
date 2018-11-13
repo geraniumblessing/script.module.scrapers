@@ -156,12 +156,13 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
       return;
     }
 
-    console.log(tvshowLink, 'tvshowLink');
 
-    let parserWatch = await libs.client.request(tvshowLink+'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
+    tvshowLink += 'watch/';
+
+    let parserWatch = await libs.client.request(tvshowLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
     if (!parserWatch) {
-      console.log('error when get link watch', tvshowLink+'watch/');
+      console.log('error when get link watch', tvshowLink);
       return;
     }
     let listEps = parserWatch('.btn-eps');
