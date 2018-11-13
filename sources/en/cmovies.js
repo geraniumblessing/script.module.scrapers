@@ -358,12 +358,12 @@ tvshow = function () {
                       case 3:
                         parserEmbed = _context5.sent;
 
-                        if (!parseEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
+                        if (!parserEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
                           _context5.next = 14;
                           break;
                         }
 
-                        openloadLink = parseEmbed.match(/http.+\:\/\/openload.co\/embed\/.+\"/ig);
+                        openloadLink = parserEmbed.match(/http.+\:\/\/openload.co\/embed\/.+\"/ig);
 
                         if (!openloadLink) {
                           _context5.next = 12;
@@ -406,7 +406,7 @@ tvshow = function () {
                         return _context5.stop();
                     }
                   }
-                }, _callee5, this);
+                }, _callee5, undefined);
               }));
 
               return function (_x17) {

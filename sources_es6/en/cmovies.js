@@ -180,14 +180,14 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
 
     console.log(episodeLink, 'episodeLink');
 
-    let arrPromise = episodeLink.map(async function(item) {
+    let arrPromise = episodeLink.map(async (item) => {
 
       console.log(item, 'embed');
       let parserEmbed = await libs.client.request(item, 'GET'); 
 
-      if (parseEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
+      if (parserEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
 
-        let openloadLink = parseEmbed.match(/http.+\:\/\/openload.co\/embed\/.+\"/ig); 
+        let openloadLink = parserEmbed.match(/http.+\:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
           console.log(openloadLink[0], 'parserEmbed');
