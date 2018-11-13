@@ -182,7 +182,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
     let arrPromise = episodeLink.map(async function(item) {
 
       console.log(item, 'embed');
-      parserEmbed = await libs.client.request(item, 'GET'); 
+      let parserEmbed = await libs.client.request(item, 'GET'); 
 
       if (parseEmbed.match(/http.+\:\/\/openload\.co\/embed\/.+\"/ig)) {
 

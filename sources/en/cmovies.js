@@ -342,7 +342,7 @@ tvshow = function () {
 
             arrPromise = episodeLink.map(function () {
               var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(item) {
-                var openloadLink, embed, _embed2;
+                var parserEmbed, openloadLink, embed, _embed2;
 
                 return regeneratorRuntime.wrap(function _callee5$(_context5) {
                   while (1) {
