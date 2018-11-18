@@ -143,14 +143,12 @@ var d = function d(_0x5ecd00, _0x184b8d) {
   }
 };
 
-var host = {
+var config = {
   priority: 1,
-  language: ['en'],
-  base_link: '',
-  embed: embed
+  language: ['en']
 };
 
-host.host = function () {
+host = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, embed, listDirect, callback) {
     var parser, script, match, sources, srces, item, result;
     return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -238,7 +236,7 @@ host.host = function () {
     }, _callee, undefined, [[0, 25]]);
   }));
 
-  return function (_x, _x2, _x3, _x4) {
+  return function host(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
   };
 }();

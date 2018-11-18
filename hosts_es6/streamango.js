@@ -195,14 +195,12 @@ let _0x0295 = [
     }
   };
 
-let host = {
+let config = {
 	priority : 1,
-	language : ['en'],
-	base_link : '',
-	embed : embed
+	language : ['en']
 };
 
-host.host = async (libs, embed, listDirect, callback) => {
+host = async (libs, embed, listDirect, callback) => {
 
 	try {
 

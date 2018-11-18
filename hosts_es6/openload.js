@@ -1,15 +1,14 @@
-let host = {
+let config = {
 	priority : 1,
 	language : ['en'],
-	base_link : '',
 	api_get_direct: 'http://localhost:8889/v1/openload/get'
 };
 
-host.host = async (libs, embed, listDirect, callback) => {
+host = async (libs, embed, listDirect, callback) => {
 	try {
 
-		let parser = await libs.client.request(embed, 'GET');
-		let direct = await libs.client.request(host.api_get_direct, 'POST', {
+		let parser = await libs.client.request(embed.url, 'GET');
+		let direct = await libs.client.request(config.api_get_direct, 'POST', {
 			'data': parser
 		});
 		direct = JSON.parse(direct);
@@ -29,5 +28,3 @@ host.host = async (libs, embed, listDirect, callback) => {
 		return;
 	}
 };
-
-WmrBLZZdx2UN26Sq = host;

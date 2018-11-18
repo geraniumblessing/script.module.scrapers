@@ -78,7 +78,6 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
     let movieLink = '';
     let listLink = [];
 
-
     let searchLink = source.search_link + infoMovie.title + "+" +infoMovie.year;
     let parser = await libs.client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
