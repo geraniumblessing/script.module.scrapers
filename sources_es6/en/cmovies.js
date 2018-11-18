@@ -96,7 +96,7 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
       console.log(title.toLowerCase(), 'title');
 
       if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
-        movieLink = parse(this).attr('href');
+        movieLink = parser(this).attr('href');
       }
     });
 
