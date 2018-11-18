@@ -164,9 +164,13 @@ movie = function () {
             listItem = parser('a.ml-mask');
 
 
+            console.log(listItem.length, 'listItem');
+
             listItem.each(function () {
 
               var title = parser(this).attr('title');
+
+              console.log(title.toLowerCase(), 'title');
 
               if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
                 movieLink = parse(this).attr('href');
@@ -174,33 +178,37 @@ movie = function () {
             });
 
             if (!(movieLink == '')) {
-              _context4.next = 13;
+              _context4.next = 14;
               break;
             }
 
             return _context4.abrupt('return');
 
-          case 13:
-            _context4.next = 15;
+          case 14:
+            _context4.next = 16;
             return libs.client.request(movieLink + "watch", 'GET', {}, {}, false, '', '', '', 'dom');
 
-          case 15:
+          case 16:
             parser = _context4.sent;
 
             if (parser) {
-              _context4.next = 18;
+              _context4.next = 19;
               break;
             }
 
             return _context4.abrupt('return');
 
-          case 18:
+          case 19:
             listEps = parser('.btn-eps');
 
+
+            console.log(listEps, 'listEps');
 
             listEps.each(function () {
               listLinks.push(parser(this).attr('href'));
             });
+
+            console.log(listLinks, 'listLinks');
 
             arrPromise = listLinks.map(function () {
               var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(item) {
@@ -268,25 +276,25 @@ movie = function () {
                 return _ref4.apply(this, arguments);
               };
             }());
-            _context4.next = 23;
+            _context4.next = 26;
             return Promise.all(arrPromise);
 
-          case 23:
+          case 26:
             return _context4.abrupt('return');
 
-          case 26:
-            _context4.prev = 26;
+          case 29:
+            _context4.prev = 29;
             _context4.t0 = _context4['catch'](0);
 
             console.log(String(_context4.t0));
             return _context4.abrupt('return');
 
-          case 30:
+          case 33:
           case 'end':
             return _context4.stop();
         }
       }
-    }, _callee4, undefined, [[0, 26]]);
+    }, _callee4, undefined, [[0, 29]]);
   }));
 
   return function movie(_x6, _x7, _x8, _x9, _x10, _x11) {
