@@ -72,7 +72,7 @@ const streamdor = async (libs, html, src, olod)  => {
 getSource = async (url) => {
   return;
 };
-movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
+movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  => {
   try {
 
     let movieLink = '';
@@ -119,7 +119,7 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
           let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
           if (embed) {
 
-            getDirect(libs, embed, listDirect, callback);
+            getDirect(libs, listHosts, embed, listDirect, callback);
           }
         }
       } else {
@@ -128,7 +128,7 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
 
         if(embed) {
 
-          getDirect(libs, embed, listDirect, callback);
+          getDirect(libs, listHosts, embed, listDirect, callback);
         }
         
       }
@@ -140,7 +140,7 @@ movie = async (libs, infoMovie, listDirect, getDirect, callback)  => {
     return;
   }
 };
-tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
+tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => {
 
   try {
 
@@ -178,7 +178,6 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
 
     let parserWatch = await libs.client.request(tvshowLink+'watch/', 'GET', {}, {}, false, '', '', '', 'dom');
 
-    console.log(parserWatch);
 
     if (!parserWatch) {
       console.log('error when get link watch', tvshowLink);
@@ -213,7 +212,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
           let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
           if (embed) {
 
-            getDirect(libs, embed, listDirect, callback);
+            getDirect(libs, listHosts, embed, listDirect, callback);
           }
         }
       } else {
@@ -224,7 +223,7 @@ tvshow = async (libs, infoMovie, listDirect, getDirect, callback) => {
         if(embed) {
 
           console.log(embed, 'get embed');
-          getDirect(libs, embed, listDirect, callback);
+          getDirect(libs, listHosts, embed, listDirect, callback);
         }
         
       }
