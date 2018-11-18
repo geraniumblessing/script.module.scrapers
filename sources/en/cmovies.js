@@ -115,7 +115,7 @@ var streamdor = function () {
     return _ref.apply(this, arguments);
   };
 }();
-
+//ádasd
 getSource = function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url) {
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
