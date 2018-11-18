@@ -156,31 +156,44 @@ host = function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
+
+
+            console.log('parser embed', embed.url);
+            _context.next = 4;
             return libs.client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
 
-          case 3:
+          case 4:
             parser = _context.sent;
 
+
+            console.log(parser, 'parser');
+
             if (parser) {
-              _context.next = 6;
+              _context.next = 8;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 6:
+          case 8:
             script = parser('script:contains("var srces")').html();
 
+
+            console.log(script, 'script');
+
             if (script) {
-              _context.next = 9;
+              _context.next = 12;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 9:
+          case 12:
             match = script.match(/srces.push *\( *{ *type *: *"video\/mp4"(.*);/ig);
+
+
+            console.log(match, 'match');
+
             sources = [];
             srces = [];
 
@@ -189,24 +202,25 @@ host = function () {
               eval(val);
             });
 
+            console.log(srces, 'srces');
             _context.t0 = regeneratorRuntime.keys(srces);
 
-          case 14:
+          case 19:
             if ((_context.t1 = _context.t0()).done) {
-              _context.next = 23;
+              _context.next = 28;
               break;
             }
 
             item = _context.t1.value;
 
             if (srces[item].src) {
-              _context.next = 18;
+              _context.next = 23;
               break;
             }
 
-            return _context.abrupt("continue", 14);
+            return _context.abrupt("continue", 19);
 
-          case 18:
+          case 23:
             result = {
               'source': embed.source, 'quality': embed.qual,
               'language': embed.language, 'url': srces[item].src, 'info': embed.info,
@@ -216,24 +230,24 @@ host = function () {
 
             callback(result);
             listDirect.push(result);
-            _context.next = 14;
+            _context.next = 19;
             break;
 
-          case 23:
-            _context.next = 28;
+          case 28:
+            _context.next = 33;
             break;
 
-          case 25:
-            _context.prev = 25;
+          case 30:
+            _context.prev = 30;
             _context.t2 = _context["catch"](0);
             return _context.abrupt("return");
 
-          case 28:
+          case 33:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[0, 25]]);
+    }, _callee, undefined, [[0, 30]]);
   }));
 
   return function host(_x, _x2, _x3, _x4) {
