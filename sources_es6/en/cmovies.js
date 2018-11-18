@@ -86,9 +86,14 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
     let listItem = parser('a.ml-mask');
 
 
+    console.log(listItem.length, 'listItem');
+
+
     listItem.each(function() {
 
       let title = parser(this).attr('title');
+
+      console.log(title.toLowerCase(), 'title');
 
       if (title.toLowerCase() == infoMovie.title.toLowerCase() || title.toLowerCase() == infoMovie.title.toLowerCase() + " " + infoMovie.year) {
         movieLink = parse(this).attr('href');
@@ -103,9 +108,13 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
 
     let listEps = parser('.btn-eps');
 
+    console.log(listEps, 'listEps');
+
     listEps.each(function() {
         listLinks.push(parser(this).attr('href'));
     });
+
+    console.log(listLinks, 'listLinks');
 
     let arrPromise = listLinks.map(async (item) => {
 
