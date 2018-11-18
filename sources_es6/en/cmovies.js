@@ -53,15 +53,15 @@ const streamdor = async (libs, html, src, olod)  => {
   if (findEmbed) {
 
     return detail = {
-      'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'], 
-      'info': '', direct: false, 'debridonly': false
+      'source': 'Cmovies - Streamango', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'], 
+      'info': '', direct: false, 'debridonly': false,
     };
 
   }
 
   if (olod) {
     return {
-      'source': 'openload.co', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
+      'source': 'Cmovies - Openload', 'quality': qual, 'language': 'en', 'url': findEmbed[0], 
       'info': '', direct: false, 'debridonly': false
     };
   }

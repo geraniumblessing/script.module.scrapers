@@ -204,21 +204,16 @@ host = async (libs, embed, listDirect, callback) => {
 
 	try {
 
-    console.log('parser embed', embed.url);
 		let parser = await libs.client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
 
-    console.log(parser, 'parser');
 		if (!parser) return;
 
 		let script = parser('script:contains("var srces")').html();
-
-    console.log(script, 'script');
 
 		if (!script) return;
 
 		let match = script.match(/srces.push *\( *{ *type *: *"video\/mp4"(.*);/ig);	
 
-    console.log(match, 'match');
 
 		let sources = [];
 	    let srces   = [];
@@ -227,16 +222,16 @@ host = async (libs, embed, listDirect, callback) => {
 	        eval(val);
 	    });
 	     
-      console.log(srces, 'srces'); 
 	    for (let item in srces) {
 
 	    	if (!srces[item].src) continue;
 
 	    	let result = {
 	    		'source': embed.source, 'quality': embed.qual, 
-	    		'language': embed.language, 'url': srces[item].src, 'info': embed.info,
-               	'direct': true, 'debridonly': embed.debridonly
-            };
+	    		'language': embed.language, 'url': libs.lodash.startsWith(srces[item].src, '/') ? 'http'+srces[item].src : srces[item].src, 
+          'info': embed.info,
+          'direct': true, 'debridonly': embed.debridonly
+        };
 
             callback(result);
             listDirect.push(result);

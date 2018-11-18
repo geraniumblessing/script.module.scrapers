@@ -85,7 +85,7 @@ var streamdor = function () {
             }
 
             return _context.abrupt('return', detail = {
-              'source': 'streamango.com', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'],
+              'source': 'Cmovies - Streamango', 'quality': qual, 'language': 'en', 'url': findEmbed['embed'],
               'info': '', direct: false, 'debridonly': false
             });
 
@@ -96,7 +96,7 @@ var streamdor = function () {
             }
 
             return _context.abrupt('return', {
-              'source': 'openload.co', 'quality': qual, 'language': 'en', 'url': findEmbed[0],
+              'source': 'Cmovies - Openload', 'quality': qual, 'language': 'en', 'url': findEmbed[0],
               'info': '', direct: false, 'debridonly': false
             });
 
