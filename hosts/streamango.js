@@ -156,44 +156,31 @@ host = function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-
-
-            console.log('parser embed', embed.url);
-            _context.next = 4;
+            _context.next = 3;
             return libs.client.request(embed.url, 'GET', {}, {}, false, '', '', '', 'dom');
 
-          case 4:
+          case 3:
             parser = _context.sent;
 
-
-            console.log(parser, 'parser');
-
             if (parser) {
-              _context.next = 8;
+              _context.next = 6;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 8:
+          case 6:
             script = parser('script:contains("var srces")').html();
 
-
-            console.log(script, 'script');
-
             if (script) {
-              _context.next = 12;
+              _context.next = 9;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 12:
+          case 9:
             match = script.match(/srces.push *\( *{ *type *: *"video\/mp4"(.*);/ig);
-
-
-            console.log(match, 'match');
-
             sources = [];
             srces = [];
 
@@ -202,52 +189,52 @@ host = function () {
               eval(val);
             });
 
-            console.log(srces, 'srces');
             _context.t0 = regeneratorRuntime.keys(srces);
 
-          case 19:
+          case 14:
             if ((_context.t1 = _context.t0()).done) {
-              _context.next = 28;
+              _context.next = 23;
               break;
             }
 
             item = _context.t1.value;
 
             if (srces[item].src) {
-              _context.next = 23;
+              _context.next = 18;
               break;
             }
 
-            return _context.abrupt("continue", 19);
+            return _context.abrupt("continue", 14);
 
-          case 23:
+          case 18:
             result = {
               'source': embed.source, 'quality': embed.qual,
-              'language': embed.language, 'url': srces[item].src, 'info': embed.info,
+              'language': embed.language, 'url': libs.lodash.startsWith(srces[item].src, '/') ? 'http' + srces[item].src : srces[item].src,
+              'info': embed.info,
               'direct': true, 'debridonly': embed.debridonly
             };
 
 
             callback(result);
             listDirect.push(result);
-            _context.next = 19;
+            _context.next = 14;
             break;
 
-          case 28:
-            _context.next = 33;
+          case 23:
+            _context.next = 28;
             break;
 
-          case 30:
-            _context.prev = 30;
+          case 25:
+            _context.prev = 25;
             _context.t2 = _context["catch"](0);
             return _context.abrupt("return");
 
-          case 33:
+          case 28:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[0, 30]]);
+    }, _callee, undefined, [[0, 25]]);
   }));
 
   return function host(_x, _x2, _x3, _x4) {
