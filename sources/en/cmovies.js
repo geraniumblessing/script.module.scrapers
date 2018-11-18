@@ -137,7 +137,7 @@ getSource = function () {
   };
 }();
 movie = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(libs, infoMovie, listDirect, getDirect, callback) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(libs, listHosts, infoMovie, listDirect, getDirect, callback) {
     var movieLink, listLink, searchLink, parser, listItem, listEps, arrPromise;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
@@ -236,7 +236,7 @@ movie = function () {
 
                         if (embed) {
 
-                          getDirect(libs, embed, listDirect, callback);
+                          getDirect(libs, listHosts, embed, listDirect, callback);
                         }
 
                       case 10:
@@ -253,7 +253,7 @@ movie = function () {
 
                         if (_embed) {
 
-                          getDirect(libs, _embed, listDirect, callback);
+                          getDirect(libs, listHosts, _embed, listDirect, callback);
                         }
 
                       case 16:
@@ -264,7 +264,7 @@ movie = function () {
                 }, _callee3, undefined);
               }));
 
-              return function (_x11) {
+              return function (_x12) {
                 return _ref4.apply(this, arguments);
               };
             }());
@@ -289,12 +289,12 @@ movie = function () {
     }, _callee4, undefined, [[0, 26]]);
   }));
 
-  return function movie(_x6, _x7, _x8, _x9, _x10) {
+  return function movie(_x6, _x7, _x8, _x9, _x10, _x11) {
     return _ref3.apply(this, arguments);
   };
 }();
 tvshow = function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(libs, infoMovie, listDirect, getDirect, callback) {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(libs, listHosts, infoMovie, listDirect, getDirect, callback) {
     var tvshowLink, episodeLink, searchText, parser, listItem, parserWatch, listEps, arrPromise;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
@@ -407,7 +407,7 @@ tvshow = function () {
 
                         if (embed) {
 
-                          getDirect(libs, embed, listDirect, callback);
+                          getDirect(libs, listHosts, embed, listDirect, callback);
                         }
 
                       case 12:
@@ -425,7 +425,7 @@ tvshow = function () {
                         if (_embed2) {
 
                           console.log(_embed2, 'get embed');
-                          getDirect(libs, _embed2, listDirect, callback);
+                          getDirect(libs, listHosts, _embed2, listDirect, callback);
                         }
 
                       case 18:
@@ -436,7 +436,7 @@ tvshow = function () {
                 }, _callee5, undefined);
               }));
 
-              return function (_x17) {
+              return function (_x19) {
                 return _ref6.apply(this, arguments);
               };
             }());
@@ -461,7 +461,7 @@ tvshow = function () {
     }, _callee6, undefined, [[0, 30]]);
   }));
 
-  return function tvshow(_x12, _x13, _x14, _x15, _x16) {
+  return function tvshow(_x13, _x14, _x15, _x16, _x17, _x18) {
     return _ref5.apply(this, arguments);
   };
 }();
