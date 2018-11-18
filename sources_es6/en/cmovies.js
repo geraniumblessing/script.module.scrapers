@@ -120,9 +120,9 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
 
       let parserEmbed = await libs.client.request(item, 'GET');
 
-      if (parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+      if (parserEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
 
-        let openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
+        let openloadLink = parserEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig); 
         if (openloadLink) {
 
           let embed = await streamdor(libs, trim(openloadLink[0]), item, true);
