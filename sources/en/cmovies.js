@@ -224,12 +224,12 @@ movie = function () {
                       case 2:
                         parserEmbed = _context3.sent;
 
-                        if (!parseEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
+                        if (!parserEmbed.match(/http.+:\/\/openload\.co\/embed\/.+\"/ig)) {
                           _context3.next = 12;
                           break;
                         }
 
-                        openloadLink = parseEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
+                        openloadLink = parserEmbed.match(/http.+:\/\/openload.co\/embed\/.+\"/ig);
 
                         if (!openloadLink) {
                           _context3.next = 10;
