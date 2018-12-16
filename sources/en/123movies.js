@@ -38,7 +38,7 @@ var getLink = function () {
 					case 0:
 						_context.prev = 0;
 						_context.next = 3;
-						return libs.client.request(url);
+						return libs.client.request(url, 'GET');
 
 					case 3:
 						parseIframe = _context.sent;
