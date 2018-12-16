@@ -34,8 +34,8 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 		let token = parseIframe.match(/var *tc *\= *\'(.+?)\'/i);
 		let tokenCode = parseIframe.match(/\"\_token\" *\: *\"([^\"]+)/i);
-		let seeds = parseIframe.match(/return *_12Wx69\(_1x72a\) + "([^\"]+)/i);
-		let pair = parseIframe.match(/return *_12Wx69\(_1x72a\) *\+ *\"[0-9]+" *\+ *\"([^\"]+)/i);
+		let seeds = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *"([0-9]+)/i);
+		let pair = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *\"[0-9]+\" *\+ *\"([0-9]+)/i);
 		// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 		// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 

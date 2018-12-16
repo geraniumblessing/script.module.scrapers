@@ -50,8 +50,8 @@ var getLink = function () {
 						parseIframe = _context.sent;
 						token = parseIframe.match(/var *tc *\= *\'(.+?)\'/i);
 						tokenCode = parseIframe.match(/\"\_token\" *\: *\"([^\"]+)/i);
-						seeds = parseIframe.match(/return *_12Wx69\(_1x72a\) + "([^\"]+)/i);
-						pair = parseIframe.match(/return *_12Wx69\(_1x72a\) *\+ *\"[0-9]+" *\+ *\"([^\"]+)/i);
+						seeds = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *"([0-9]+)/i);
+						pair = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *\"[0-9]+\" *\+ *\"([0-9]+)/i);
 						// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 						// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
