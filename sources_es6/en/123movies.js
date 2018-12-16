@@ -40,7 +40,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 		// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
 		if (!token || !tokenCode || !seeds || !pair) {
-			console.log('token', token, tokenCode);
+			console.log('token1', token, tokenCode, seeds, pair);
 			return;
 		}
 
