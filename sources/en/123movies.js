@@ -166,8 +166,9 @@ movie = function () {
 					case 0:
 						_context2.prev = 0;
 						urlMovie = libs.cleantitle.geturl(infoMovie.title);
+						// urlMovie = `${source.base_link}/movies/${urlMovie}-watch-online-free-123movies/`;
 
-						urlMovie = source.base_link + '/movies/' + urlMovie + '-watch-online-free-123movies/';
+						urlMovie = source.base_link + '/movie/' + urlMovie;
 
 						_context2.next = 5;
 						return libs.client.request(urlMovie, 'GET');
