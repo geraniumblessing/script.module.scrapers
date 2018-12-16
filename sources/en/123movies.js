@@ -105,7 +105,7 @@ var getLink = function () {
 						};
 						urlToken = source.source_link + source.decode_file;
 						_context.next = 28;
-						return libs.client.request(urlToken, 'POST', body, headers);
+						return libs.client.request(urlToken, 'POST', body, headers, true, iframe);
 
 					case 28:
 						response = _context.sent;
