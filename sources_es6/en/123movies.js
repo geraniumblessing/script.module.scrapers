@@ -80,7 +80,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 		};
 		let urlToken = source.source_link+source.decode_file;
 
-		let response = await libs.client.request(urlToken, 'POST', body, headers, true, iframe);
+		let response = await libs.client.request(urlToken, 'POST', body, headers, true, iframe, '', '', '', 50000);
 
 		console.log('response', response);
 
