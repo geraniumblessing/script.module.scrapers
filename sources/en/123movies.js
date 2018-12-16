@@ -56,14 +56,17 @@ var getLink = function () {
 						// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
 						if (!(!token || !tokenCode || !seeds || !pair)) {
-							_context.next = 15;
+							_context.next = 18;
 							break;
 						}
 
-						console.log('token1', token, tokenCode, seeds, pair);
+						console.log('token1', token);
+						console.log('tokenCode', tokenCode);
+						console.log('seeds', seeds);
+						console.log('pair', pair);
 						return _context.abrupt('return');
 
-					case 15:
+					case 18:
 
 						token = token[1];
 						tokenCode = tokenCode[1];
@@ -105,24 +108,24 @@ var getLink = function () {
 							'_token': tokenCode
 						};
 						urlToken = source.source_link + source.decode_file;
-						_context.next = 29;
+						_context.next = 32;
 						return libs.client.request(urlToken, 'POST', body, headers);
 
-					case 29:
+					case 32:
 						response = _context.sent;
 
 
 						console.log('response', response);
 
 						if (!response) {
-							_context.next = 51;
+							_context.next = 54;
 							break;
 						}
 
 						_iteratorNormalCompletion = true;
 						_didIteratorError = false;
 						_iteratorError = undefined;
-						_context.prev = 35;
+						_context.prev = 38;
 
 
 						for (_iterator = response[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -146,55 +149,55 @@ var getLink = function () {
 								}
 							}
 						}
-						_context.next = 43;
+						_context.next = 46;
 						break;
 
-					case 39:
-						_context.prev = 39;
-						_context.t0 = _context['catch'](35);
+					case 42:
+						_context.prev = 42;
+						_context.t0 = _context['catch'](38);
 						_didIteratorError = true;
 						_iteratorError = _context.t0;
 
-					case 43:
-						_context.prev = 43;
-						_context.prev = 44;
+					case 46:
+						_context.prev = 46;
+						_context.prev = 47;
 
 						if (!_iteratorNormalCompletion && _iterator.return) {
 							_iterator.return();
 						}
 
-					case 46:
-						_context.prev = 46;
+					case 49:
+						_context.prev = 49;
 
 						if (!_didIteratorError) {
-							_context.next = 49;
+							_context.next = 52;
 							break;
 						}
 
 						throw _iteratorError;
 
-					case 49:
+					case 52:
+						return _context.finish(49);
+
+					case 53:
 						return _context.finish(46);
 
-					case 50:
-						return _context.finish(43);
-
-					case 51:
+					case 54:
 						return _context.abrupt('return');
 
-					case 54:
-						_context.prev = 54;
+					case 57:
+						_context.prev = 57;
 						_context.t1 = _context['catch'](0);
 
 						console.log(String(_context.t1));
 						return _context.abrupt('return');
 
-					case 58:
+					case 61:
 					case 'end':
 						return _context.stop();
 				}
 			}
-		}, _callee, undefined, [[0, 54], [35, 39, 43, 51], [44,, 46, 50]]);
+		}, _callee, undefined, [[0, 57], [38, 42, 46, 54], [47,, 49, 53]]);
 	}));
 
 	return function getLink(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
