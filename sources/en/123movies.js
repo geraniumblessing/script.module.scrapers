@@ -170,7 +170,7 @@ movie = function () {
 						urlMovie = source.base_link + '/movies/' + urlMovie + '-watch-online-free-123movies/';
 
 						_context2.next = 5;
-						return libs.client.request(urlMovie);
+						return libs.client.request(urlMovie, 'GET');
 
 					case 5:
 						parse = _context2.sent;
@@ -227,7 +227,7 @@ tvshow = function () {
 						urlMovie = source.base_link + '/episodes/' + urlMovie + '-' + infoMovie.season + 'x' + infoMovie.episode + '/';
 
 						_context3.next = 5;
-						return libs.client.request(urlMovie);
+						return libs.client.request(urlMovie, 'GET');
 
 					case 5:
 						parse = _context3.sent;
