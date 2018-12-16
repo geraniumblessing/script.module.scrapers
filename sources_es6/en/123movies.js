@@ -9,7 +9,10 @@ source = {
 };
 
 
-function _tsd_tsd_ds(s) { var _97x65m = s;var _83Mxx179 = _97x65m.slice(5,11);var _146hx20 = _93x580G(_83Mxx179);            var _1x61I = _e60xe8(_146hx20); return _36Jx73(_1x61I) + "11"+"587708";           }           function _93x580G(s){return s.split("");}function _e60xe8(r){return  r.reverse();}function _36Jx73(n){return n.join("");}
+// function _tsd_tsd_ds(s) { 
+// 	var _97x65m = s;var _83Mxx179 = _97x65m.slice(5,11);var _146hx20 = _93x580G(_83Mxx179);            var _1x61I = _e60xe8(_146hx20); return _36Jx73(_1x61I) + "11"+"587708";           
+// }           
+// function _93x580G(s){return s.split("");}function _e60xe8(r){return  r.reverse();}function _36Jx73(n){return n.join("");}
 
 
 const xToken = (token, seeds) => {
@@ -31,12 +34,37 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 		let token = parseIframe.match(/'var tc = \'(.+?)\''/i);
 		let tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
+		let seeds = parseIframe.match(/return *_12Wx69\(_1x72a\) + "([^\"]+)/i);
+		let pair = parseIframe.match(/return *_12Wx69\(_1x72a\) *\+ *\"[0-9]+" *\+ *\"([^\"]+)/i);
 		// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 		// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
-		if (!token || !tokenCode) {
+		if (!token || !tokenCode || !seeds || !pair) {
 			console.log('token', token, tokenCode);
 			return;
+		}
+
+
+		token = token[1];
+		tokenCode = tokenCode[1];
+		seeds = seeds[1];
+		pair = pair[1];
+
+		console.log('token', token, tokenCode, seeds, pair);
+
+
+		const _93x580G = (s) => {return s.split("");}
+		const _e60xe8 = (r) => {
+			return  r.reverse();
+		}
+		const  _36Jx73 = (n) => {return n.join("");}
+
+		const _tsd_tsd_ds = (s) => { 
+			var _97x65m = s;
+			var _83Mxx179 = _97x65m.slice(5,11);
+			var _146hx20 = _93x580G(_83Mxx179);            
+			var _1x61I = _e60xe8(_146hx20); r
+			return _36Jx73(_1x61I) + seeds+pair;           
 		}
 
 		// let headerToken = xToken(token, seeds);
@@ -63,7 +91,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 				if (item) {
 
-					if (item.indexOf('googleusercontent') != -1) {
+					if (item.indexOf('googleusercontent') != -1 || item.indexOf('gomostream') != -1) {
 
 						console.log('direct', item);
 						getDirect(libs, listHosts, {
