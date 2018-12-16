@@ -34,26 +34,22 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 		let token = parseIframe.match(/var *tc *\= *\'(.+?)\'/i);
 		let tokenCode = parseIframe.match(/\"\_token\" *\: *\"([^\"]+)/i);
-		let seeds = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *"([0-9]+)/i);
-		let pair = parseIframe.match(/return *\_12Wx69\(_1x72a\) *\+ *\"[0-9]+\" *\+ *\"([0-9]+)/i);
+		let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 		// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 		// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
-		if (!token || !tokenCode || !seeds || !pair) {
+		if (!token || !tokenCode || !seeds) {
 			console.log('token1', token);
 			console.log('tokenCode', tokenCode);
 			console.log('seeds', seeds);
-			console.log('pair', pair);
 			return;
 		}
 
 
 		token = token[1];
 		tokenCode = tokenCode[1];
-		seeds = seeds[1];
-		pair = pair[1];
 
-		console.log('token', token, tokenCode, seeds, pair);
+		console.log('token', token, tokenCode, seeds[3], seeds[4]);
 
 
 		const _93x580G = (s) => {return s.split("");}
@@ -67,7 +63,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 			var _83Mxx179 = _97x65m.slice(5,11);
 			var _146hx20 = _93x580G(_83Mxx179);            
 			var _1x61I = _e60xe8(_146hx20); 
-			return _36Jx73(_1x61I) + seeds+pair;           
+			return _36Jx73(_1x61I) + seeds[3]+pair[4];           
 		}
 
 		// let headerToken = xToken(token, seeds);
