@@ -30,7 +30,7 @@ var getLink = function () {
 	var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, listHosts, infoMovie, listDirect, getDirect, callback, url) {
 		var isTvshow = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
 
-		var parseIframe, token, tokenCode, seeds, pair, _93x580G, _e60xe8, _36Jx73, _tsd_tsd_ds, headers, body, urlToken, response, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
+		var parse, iframe, parseIframe, token, tokenCode, seeds, pair, _93x580G, _e60xe8, _36Jx73, _tsd_tsd_ds, headers, body, urlToken, response, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
 
 		return regeneratorRuntime.wrap(function _callee$(_context) {
 			while (1) {
@@ -38,26 +38,32 @@ var getLink = function () {
 					case 0:
 						_context.prev = 0;
 						_context.next = 3;
-						return libs.client.request(url, 'GET');
+						return libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
 
 					case 3:
+						parse = _context.sent;
+						iframe = parse('div.videoPlayer iframe').attr('src');
+						_context.next = 7;
+						return libs.client.request(iframe, 'GET');
+
+					case 7:
 						parseIframe = _context.sent;
-						token = parseIframe.match(/'var tc = \'(.+?)\''/i);
-						tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
+						token = parseIframe.match(/var *tc *\= *\'(.+?)\'/i);
+						tokenCode = parseIframe.match(/\"\_token\" *\: *\"([^\"]+)/i);
 						seeds = parseIframe.match(/return *_12Wx69\(_1x72a\) + "([^\"]+)/i);
 						pair = parseIframe.match(/return *_12Wx69\(_1x72a\) *\+ *\"[0-9]+" *\+ *\"([^\"]+)/i);
 						// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
 						// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
 						if (!(!token || !tokenCode || !seeds || !pair)) {
-							_context.next = 11;
+							_context.next = 15;
 							break;
 						}
 
 						console.log('token', token, tokenCode);
 						return _context.abrupt('return');
 
-					case 11:
+					case 15:
 
 						token = token[1];
 						tokenCode = tokenCode[1];
@@ -99,24 +105,24 @@ var getLink = function () {
 							'_token': tokenCode
 						};
 						urlToken = source.source_link + source.decode_file;
-						_context.next = 25;
+						_context.next = 29;
 						return libs.client.request(urlToken, 'POST', body, headers);
 
-					case 25:
+					case 29:
 						response = _context.sent;
 
 
 						console.log('response', response);
 
 						if (!response) {
-							_context.next = 47;
+							_context.next = 51;
 							break;
 						}
 
 						_iteratorNormalCompletion = true;
 						_didIteratorError = false;
 						_iteratorError = undefined;
-						_context.prev = 31;
+						_context.prev = 35;
 
 
 						for (_iterator = response[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -140,55 +146,55 @@ var getLink = function () {
 								}
 							}
 						}
-						_context.next = 39;
+						_context.next = 43;
 						break;
-
-					case 35:
-						_context.prev = 35;
-						_context.t0 = _context['catch'](31);
-						_didIteratorError = true;
-						_iteratorError = _context.t0;
 
 					case 39:
 						_context.prev = 39;
-						_context.prev = 40;
+						_context.t0 = _context['catch'](35);
+						_didIteratorError = true;
+						_iteratorError = _context.t0;
+
+					case 43:
+						_context.prev = 43;
+						_context.prev = 44;
 
 						if (!_iteratorNormalCompletion && _iterator.return) {
 							_iterator.return();
 						}
 
-					case 42:
-						_context.prev = 42;
+					case 46:
+						_context.prev = 46;
 
 						if (!_didIteratorError) {
-							_context.next = 45;
+							_context.next = 49;
 							break;
 						}
 
 						throw _iteratorError;
 
-					case 45:
-						return _context.finish(42);
-
-					case 46:
-						return _context.finish(39);
-
-					case 47:
-						return _context.abrupt('return');
+					case 49:
+						return _context.finish(46);
 
 					case 50:
-						_context.prev = 50;
+						return _context.finish(43);
+
+					case 51:
+						return _context.abrupt('return');
+
+					case 54:
+						_context.prev = 54;
 						_context.t1 = _context['catch'](0);
 
 						console.log(String(_context.t1));
 						return _context.abrupt('return');
 
-					case 54:
+					case 58:
 					case 'end':
 						return _context.stop();
 				}
 			}
-		}, _callee, undefined, [[0, 50], [31, 35, 39, 47], [40,, 42, 46]]);
+		}, _callee, undefined, [[0, 54], [35, 39, 43, 51], [44,, 46, 50]]);
 	}));
 
 	return function getLink(_x, _x2, _x3, _x4, _x5, _x6, _x7) {

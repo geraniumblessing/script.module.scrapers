@@ -27,13 +27,13 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 	try {
 
-		// let parse = await libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
-		// let iframe= parse('div.videoPlayer iframe').attr('src');
+		let parse = await libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
+		let iframe= parse('div.videoPlayer iframe').attr('src');
 
-		let parseIframe = await libs.client.request(url, 'GET');
+		let parseIframe = await libs.client.request(iframe, 'GET');
 
-		let token = parseIframe.match(/'var tc = \'(.+?)\''/i);
-		let tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
+		let token = parseIframe.match(/var *tc *\= *\'(.+?)\'/i);
+		let tokenCode = parseIframe.match(/\"\_token\" *\: *\"([^\"]+)/i);
 		let seeds = parseIframe.match(/return *_12Wx69\(_1x72a\) + "([^\"]+)/i);
 		let pair = parseIframe.match(/return *_12Wx69\(_1x72a\) *\+ *\"[0-9]+" *\+ *\"([^\"]+)/i);
 		// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
