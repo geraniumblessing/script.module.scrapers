@@ -4,9 +4,13 @@ source = {
 	domains : ['123movies.as'],
 	base_link : 'https://123movies.as',
 	source_link : 'https://gomostream.com',
-	decode_file: '/decoding_v2.php',
+	decode_file: '/decoding_v3.php',
 	grabber_file: '/get.php'
 };
+
+
+function _tsd_tsd_ds(s) { var _97x65m = s;var _83Mxx179 = _97x65m.slice(5,11);var _146hx20 = _93x580G(_83Mxx179);            var _1x61I = _e60xe8(_146hx20); return _36Jx73(_1x61I) + "11"+"587708";           }           function _93x580G(s){return s.split("");}function _e60xe8(r){return  r.reverse();}function _36Jx73(n){return n.join("");}
+
 
 const xToken = (token, seeds) => {
 
@@ -20,38 +24,32 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 	try {
 
-		let parse = await libs.client.request(url);
-		let iframe= parse.match(/\<iframe .+? src\=\"(.+?)\"/i);
-
-
-
-
-		if (!iframe) {
-			console.log('iframe', iframe);
-			return;
-		}
+		let parse = await libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
+		let iframe= parse('div.videoPlayer iframe').attr('src');
 
 		let parseIframe = await libs.client.request(iframe);
 
 		let token = parseIframe.match(/'var tc = \'(.+?)\''/i);
-		let seeds = parseIframe.match(/_tsd_tsd\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
-		let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
+		let tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
+		// let seeds = parseIframe.match(/_tsd_tsd_ds\(s\) .+\.slice\((.+?),(.+?)\).+ return .+? \+ \"(.+?)\"\+\"(.+?)";/i);
+		// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
-		if (!token || !seeds || !pair) {
-			console.log('token, seeds, pair', token, seeds, pair);
+		if (!token || !tokenCode) {
+			console.log('token', token, tokenCode);
 			return;
 		}
 
-		let headerToken = xToken(token, seeds);
+		// let headerToken = xToken(token, seeds);
 
-		console.log('headerToken', headerToken)
+		// console.log('headerToken', headerToken)
 
 		let headers = {
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			'x-token': headerToken
+			'x-token': _tsd_tsd_ds(token)
 		};
 		let body = {
-			'tokenCode': token
+			'tokenCode': token,
+			'_token': tokenCode
 		};
 		let urlToken = source.source_link+source.decode_file;
 
@@ -61,43 +59,53 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 		if (response) {
 
-			for (let item in response) {
-				if (item.indexOf('vidushare.com') != -1) {
+			for (let item of response) {
 
-					console.log('direct', item);
-					getDirect(libs, listHosts, {
-				      'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': item, 
-				      'info': '', direct: true, 'debridonly': false
-				    }, listDirect, callback);
+				if (item) {
+
+					if (item.indexOf('googleusercontent') != -1) {
+
+						console.log('direct', item);
+						getDirect(libs, listHosts, {
+					      'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': item, 
+					      'info': '', direct: true, 'debridonly': false
+					    }, listDirect, callback);
+					} else {
+						getDirect(libs, listHosts, {
+					      'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': item, 
+					      'info': '', direct: false, 'debridonly': false
+					    }, listDirect, callback);
+					}
 				}
+				
 			}
 		}
 		
 
-		if (isTvshow) {
+		// if (isTvshow) {
 
-			let urlGrabber = source.source_link+source.grabber_file;
-			let bodyGrabber = {
-				'type': 'episode',
-				'imd_id': infoMovie.imdb,
-				'seasonsNo': infoMovie.season,
-				'episodesNo': infoMovie.episode
-			}; 
-			bodyGrabber[pair[0]] = pair[1];
+		// 	let urlGrabber = source.source_link+source.grabber_file;
+		// 	let bodyGrabber = {
+		// 		'type': 'episode',
+		// 		'imd_id': infoMovie.imdb,
+		// 		'seasonsNo': infoMovie.season,
+		// 		'episodesNo': infoMovie.episode
+		// 	}; 
+		// 	bodyGrabber[pair[0]] = pair[1];
 
-			let responseGrabber = await libs.client.request(urlGrabber, 'POST', bodyGrabber, headers);
+		// 	let responseGrabber = await libs.client.request(urlGrabber, 'POST', bodyGrabber, headers);
 
-			if (responseGrabber) {
+		// 	if (responseGrabber) {
 
-				for (let item in responseGrabber) {
+		// 		for (let item in responseGrabber) {
 
-					getDirect(libs, listHosts, {
-				      'source': '123movies', 'quality': item[label], 'language': 'en', 'url': item['file'], 
-				      'info': '', direct: true, 'debridonly': false
-				    }, listDirect, callback);
-				}
-			}
-		}
+		// 			getDirect(libs, listHosts, {
+		// 		      'source': '123movies', 'quality': item[label], 'language': 'en', 'url': item['file'], 
+		// 		      'info': '', direct: true, 'debridonly': false
+		// 		    }, listDirect, callback);
+		// 		}
+		// 	}
+		// }
 
 		return;	 
 	} catch(e) {
@@ -116,17 +124,10 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
   	// urlMovie = `${source.base_link}/movies/${urlMovie}-watch-online-free-123movies/`;
   	urlMovie = `${source.base_link}/movie/${urlMovie}`;
 
-  	let parse = await libs.client.request(urlMovie, 'GET');
-  	let token = parse.match(/\/?watch-token=(.*?)/i);
+  	let parse = await libs.client.request(urlMovie, 'GET', {}, {}, false, '', '', '', 'dom');
+  	let hrefMovie = parse('div.ds_seriesplay.dsclear a').attr('href');
 
-  	if (!token) {
-  		console.log('token', token);
-  		return;
-  	};
-
-  	urlMovie = urlMovie + '?watch-token=' + token[1];
-
-  	await getLink(libs, listHosts,  infoMovie, listDirect, getDirect, callback, urlMovie);
+  	await getLink(libs, listHosts,  infoMovie, listDirect, getDirect, callback, hrefMovie);
   	return;
   } catch(e) {
     console.log(String(e));
@@ -140,14 +141,10 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
   	let urlMovie = libs.cleantitle.geturl(infoMovie.title);
   	urlMovie = `${source.base_link}/episodes/${urlMovie}-${infoMovie.season}x${infoMovie.episode}/`;
 
-  	let parse = await libs.client.request(urlMovie, 'GET');
-  	let token = parse.match(/\/?watch-token=(.*?)/i);
+  	let parse = await libs.client.request(urlMovie, 'GET', {}, {}, false, '', '', '', 'dom');
+  	let hrefMovie = parse('div.ds_seriesplay.dsclear a').attr('href');
 
-  	if (!token) return;
-
-  	urlMovie = urlMovie + '?watch-token=' + token[1];
-
-  	await getLink(libs, listHosts,  infoMovie, listDirect, getDirect, callback, urlMovie);
+  	await getLink(libs, listHosts,  infoMovie, listDirect, getDirect, callback, hrefMovie);
     return;
   } catch(e) {
     console.log(String(e));
