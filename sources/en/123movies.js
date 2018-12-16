@@ -34,7 +34,7 @@ var getLink = function () {
 	var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, listHosts, infoMovie, listDirect, getDirect, callback, url) {
 		var isTvshow = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
 
-		var parse, iframe, parseIframe, token, tokenCode, headers, body, urlToken, response, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
+		var parseIframe, token, tokenCode, headers, body, urlToken, response, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item;
 
 		return regeneratorRuntime.wrap(function _callee$(_context) {
 			while (1) {
@@ -42,15 +42,9 @@ var getLink = function () {
 					case 0:
 						_context.prev = 0;
 						_context.next = 3;
-						return libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
+						return libs.client.request(url);
 
 					case 3:
-						parse = _context.sent;
-						iframe = parse('div.videoPlayer iframe').attr('src');
-						_context.next = 7;
-						return libs.client.request(iframe);
-
-					case 7:
 						parseIframe = _context.sent;
 						token = parseIframe.match(/'var tc = \'(.+?)\''/i);
 						tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
@@ -58,14 +52,14 @@ var getLink = function () {
 						// let pair = parseIframe.match(/\'type\': \'.+\',\s*\'(.+?)\': \'(.+?)\'/i);
 
 						if (!(!token || !tokenCode)) {
-							_context.next = 13;
+							_context.next = 9;
 							break;
 						}
 
 						console.log('token', token, tokenCode);
 						return _context.abrupt('return');
 
-					case 13:
+					case 9:
 
 						// let headerToken = xToken(token, seeds);
 
@@ -80,24 +74,24 @@ var getLink = function () {
 							'_token': tokenCode
 						};
 						urlToken = source.source_link + source.decode_file;
-						_context.next = 18;
+						_context.next = 14;
 						return libs.client.request(urlToken, 'POST', body, headers);
 
-					case 18:
+					case 14:
 						response = _context.sent;
 
 
 						console.log('response', response);
 
 						if (!response) {
-							_context.next = 40;
+							_context.next = 36;
 							break;
 						}
 
 						_iteratorNormalCompletion = true;
 						_didIteratorError = false;
 						_iteratorError = undefined;
-						_context.prev = 24;
+						_context.prev = 20;
 
 
 						for (_iterator = response[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -121,55 +115,55 @@ var getLink = function () {
 								}
 							}
 						}
-						_context.next = 32;
+						_context.next = 28;
 						break;
 
-					case 28:
-						_context.prev = 28;
-						_context.t0 = _context['catch'](24);
+					case 24:
+						_context.prev = 24;
+						_context.t0 = _context['catch'](20);
 						_didIteratorError = true;
 						_iteratorError = _context.t0;
 
-					case 32:
-						_context.prev = 32;
-						_context.prev = 33;
+					case 28:
+						_context.prev = 28;
+						_context.prev = 29;
 
 						if (!_iteratorNormalCompletion && _iterator.return) {
 							_iterator.return();
 						}
 
-					case 35:
-						_context.prev = 35;
+					case 31:
+						_context.prev = 31;
 
 						if (!_didIteratorError) {
-							_context.next = 38;
+							_context.next = 34;
 							break;
 						}
 
 						throw _iteratorError;
 
-					case 38:
-						return _context.finish(35);
+					case 34:
+						return _context.finish(31);
 
-					case 39:
-						return _context.finish(32);
+					case 35:
+						return _context.finish(28);
 
-					case 40:
+					case 36:
 						return _context.abrupt('return');
 
-					case 43:
-						_context.prev = 43;
+					case 39:
+						_context.prev = 39;
 						_context.t1 = _context['catch'](0);
 
 						console.log(String(_context.t1));
 						return _context.abrupt('return');
 
-					case 47:
+					case 43:
 					case 'end':
 						return _context.stop();
 				}
 			}
-		}, _callee, undefined, [[0, 43], [24, 28, 32, 40], [33,, 35, 39]]);
+		}, _callee, undefined, [[0, 39], [20, 24, 28, 36], [29,, 31, 35]]);
 	}));
 
 	return function getLink(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
