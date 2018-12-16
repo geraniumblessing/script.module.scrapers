@@ -5,7 +5,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 var config = {
 	priority: 1,
 	language: ['en'],
-	api_get_direct: 'http://localhost:8889/v1/openload/get'
+	api_get_direct: 'https://api.teatv.net/api/v2/get_opl'
 };
 
 host = function () {
@@ -23,7 +23,8 @@ host = function () {
 						parser = _context.sent;
 						_context.next = 6;
 						return libs.client.request(config.api_get_direct, 'POST', {
-							'data': parser
+							'data': parser,
+							'token': libs.cryptoJs.MD5(parser + "teatv-openload").toString()
 						});
 
 					case 6:

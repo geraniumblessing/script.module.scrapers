@@ -1,7 +1,7 @@
 let config = {
 	priority : 1,
 	language : ['en'],
-	api_get_direct: 'http://localhost:8889/v1/openload/get'
+	api_get_direct: 'https://api.teatv.net/api/v2/get_opl'
 };
 
 host = async (libs, embed, listDirect, callback) => {
@@ -9,7 +9,8 @@ host = async (libs, embed, listDirect, callback) => {
 
 		let parser = await libs.client.request(embed.url, 'GET');
 		let direct = await libs.client.request(config.api_get_direct, 'POST', {
-			'data': parser
+			'data': parser,
+			'token': libs.cryptoJs.MD5(parser + "teatv-openload").toString()
 		});
 		direct = JSON.parse(direct);
 
