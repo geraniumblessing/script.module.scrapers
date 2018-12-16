@@ -113,7 +113,8 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
   try {
 
   	let urlMovie = libs.cleantitle.geturl(infoMovie.title);
-  	urlMovie = `${source.base_link}/movies/${urlMovie}-watch-online-free-123movies/`;
+  	// urlMovie = `${source.base_link}/movies/${urlMovie}-watch-online-free-123movies/`;
+  	urlMovie = `${source.base_link}/movie/${urlMovie}`;
 
   	let parse = await libs.client.request(urlMovie, 'GET');
   	let token = parse.match(/\/?watch-token=(.*?)/i);
