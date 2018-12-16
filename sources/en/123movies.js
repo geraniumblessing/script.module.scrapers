@@ -60,7 +60,7 @@ var getLink = function () {
 							break;
 						}
 
-						console.log('token', token, tokenCode);
+						console.log('token1', token, tokenCode, seeds, pair);
 						return _context.abrupt('return');
 
 					case 15:
