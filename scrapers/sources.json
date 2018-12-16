@@ -1,6 +1,6 @@
 {
-	"cmovies": {
-		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/cmovies.js",
+	"123movies": {
+		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/123movies.js",
 		"type": ["movie", "tvshow"]
 	}
 }

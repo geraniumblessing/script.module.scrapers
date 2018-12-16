@@ -209,7 +209,7 @@ host = function () {
           case 18:
             result = {
               'source': embed.source, 'quality': embed.qual,
-              'language': embed.language, 'url': libs.lodash.startsWith(srces[item].src, '/') ? 'http' + srces[item].src : srces[item].src,
+              'language': embed.language, 'url': libs.lodash.startsWith(srces[item].src, '/') ? 'http:' + srces[item].src : srces[item].src,
               'info': embed.info,
               'direct': true, 'debridonly': embed.debridonly
             };
