@@ -30,7 +30,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 		// let parse = await libs.client.request(url, 'GET', {}, {}, false, '', '', '', 'dom');
 		// let iframe= parse('div.videoPlayer iframe').attr('src');
 
-		let parseIframe = await libs.client.request(url);
+		let parseIframe = await libs.client.request(url, 'GET');
 
 		let token = parseIframe.match(/'var tc = \'(.+?)\''/i);
 		let tokenCode = parseIframe.match(/"\_token\" *\: *\"([^\"]+)/i);
