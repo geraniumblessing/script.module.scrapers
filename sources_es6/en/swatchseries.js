@@ -17,7 +17,7 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
 
     let searchText = libs.cleantitle.geturl(infoMovie.title);
     
-
+    
     let parser = await libs.client.request(source.search_link+searchText, 'GET');
 
 
@@ -25,14 +25,15 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
     	return;
     }
 
-    for (let item in parser) {
+    for (let item of parser) {
 
     	let titleTvshow = item['label'];
+
     	titleTvshow 	= titleTvshow.replace(/\( *[0-9]+ *\)/i, '');
     	titleTvshow 	= titleTvshow.replace(/\( *[0-9]+ *\)/i, '');
     	titleTvshow		= titleTvshow.trim();
 
-    	if (titleTvshow.toLowerCase() == infoMovie.title) {
+    	if (titleTvshow.toLowerCase() == infoMovie.title.toLowerCase()) {
     		tvshowLink = source.tvshow_link + item['seo_url'];
     		break;
     	}
@@ -64,6 +65,8 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
 
     let listEmbed = parseEmbed('a.watchlink');
 
+
+
     listEmbed.map(function() {
 
     	let hrefEncode = parseEmbed(this).attr('href');
@@ -73,6 +76,7 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
     		hrefToken = hrefToken[1];
 
     		let embed = libs.base64.decode(hrefToken);
+
 
     		if (embed) {
 

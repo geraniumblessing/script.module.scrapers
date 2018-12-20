@@ -1,5 +1,8 @@
 {
 	"streamango": {
 		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/hosts/streamango.js"
+	},
+	"openload": {
+		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/hosts/openload.js"
 	}
 }

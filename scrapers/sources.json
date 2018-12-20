@@ -2,5 +2,17 @@
 	"123movies": {
 		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/123movies.js",
 		"type": ["movie", "tvshow"]
+	},
+	"cmovies": {
+		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/cmovies.js",
+		"type": ["movie", "tvshow"]
+	},
+	"movie4k": {
+		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/movie4k.js",
+		"type": ["movie"]
+	},
+	"swatchseries": {
+		"url": "https://raw.githubusercontent.com/irisduy/script.module.scrapers/master/sources/en/swatchseries.js",
+		"type": ["tvshow"]
 	}
 }

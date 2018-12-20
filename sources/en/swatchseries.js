@@ -14,7 +14,8 @@ source = {
 
 tvshow = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(libs, listHosts, infoMovie, listDirect, getDirect, callback) {
-    var tvshowLink, episodeLink, searchText, parser, item, titleTvshow, parseEpisode, listEpisode, parseEmbed, listEmbed;
+    var tvshowLink, episodeLink, searchText, parser, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, item, titleTvshow, parseEpisode, listEpisode, parseEmbed, listEmbed;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -37,46 +38,86 @@ tvshow = function () {
             return _context.abrupt('return');
 
           case 9:
-            _context.t0 = regeneratorRuntime.keys(parser);
+            _iteratorNormalCompletion = true;
+            _didIteratorError = false;
+            _iteratorError = undefined;
+            _context.prev = 12;
+            _iterator = parser[Symbol.iterator]();
 
-          case 10:
-            if ((_context.t1 = _context.t0()).done) {
-              _context.next = 21;
+          case 14:
+            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+              _context.next = 26;
               break;
             }
 
-            item = _context.t1.value;
+            item = _step.value;
             titleTvshow = item['label'];
+
 
             titleTvshow = titleTvshow.replace(/\( *[0-9]+ *\)/i, '');
             titleTvshow = titleTvshow.replace(/\( *[0-9]+ *\)/i, '');
             titleTvshow = titleTvshow.trim();
 
-            if (!(titleTvshow.toLowerCase() == infoMovie.title)) {
-              _context.next = 19;
+            if (!(titleTvshow.toLowerCase() == infoMovie.title.toLowerCase())) {
+              _context.next = 23;
               break;
             }
 
             tvshowLink = source.tvshow_link + item['seo_url'];
-            return _context.abrupt('break', 21);
+            return _context.abrupt('break', 26);
 
-          case 19:
-            _context.next = 10;
+          case 23:
+            _iteratorNormalCompletion = true;
+            _context.next = 14;
             break;
 
-          case 21:
+          case 26:
+            _context.next = 32;
+            break;
+
+          case 28:
+            _context.prev = 28;
+            _context.t0 = _context['catch'](12);
+            _didIteratorError = true;
+            _iteratorError = _context.t0;
+
+          case 32:
+            _context.prev = 32;
+            _context.prev = 33;
+
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+
+          case 35:
+            _context.prev = 35;
+
+            if (!_didIteratorError) {
+              _context.next = 38;
+              break;
+            }
+
+            throw _iteratorError;
+
+          case 38:
+            return _context.finish(35);
+
+          case 39:
+            return _context.finish(32);
+
+          case 40:
             if (tvshowLink) {
-              _context.next = 23;
+              _context.next = 42;
               break;
             }
 
             return _context.abrupt('return');
 
-          case 23:
-            _context.next = 25;
+          case 42:
+            _context.next = 44;
             return libs.client.request(tvshowLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
-          case 25:
+          case 44:
             parseEpisode = _context.sent;
             listEpisode = parseEpisode('ul#listing_' + infoMovie.season + ' li[itemprop=episode]');
 
@@ -92,17 +133,17 @@ tvshow = function () {
             });
 
             if (episodeLink) {
-              _context.next = 30;
+              _context.next = 49;
               break;
             }
 
             return _context.abrupt('return');
 
-          case 30:
-            _context.next = 32;
+          case 49:
+            _context.next = 51;
             return libs.client.request(episodeLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
-          case 32:
+          case 51:
             parseEmbed = _context.sent;
             listEmbed = parseEmbed('a.watchlink');
 
@@ -130,19 +171,19 @@ tvshow = function () {
 
             return _context.abrupt('return');
 
-          case 38:
-            _context.prev = 38;
-            _context.t2 = _context['catch'](0);
+          case 57:
+            _context.prev = 57;
+            _context.t1 = _context['catch'](0);
 
-            console.log(String(_context.t2));
+            console.log(String(_context.t1));
             return _context.abrupt('return');
 
-          case 42:
+          case 61:
           case 'end':
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[0, 38]]);
+    }, _callee, undefined, [[0, 57], [12, 28, 32, 40], [33,, 35, 39]]);
   }));
 
   return function tvshow(_x, _x2, _x3, _x4, _x5, _x6) {

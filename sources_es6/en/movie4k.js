@@ -19,6 +19,7 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
     let movieLink = '';
 
     let searchLink = source.search_link + libs.cleantitle.geturl(infoMovie.title);
+
     let parser = await libs.client.request(searchLink, 'GET', {}, {}, false, '', '', '', 'dom');
 
     if (!parser) return;
@@ -26,7 +27,6 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
     let listItem = parser('div.item');
 
     console.log(listItem.length, 'listItem');
-
 
     listItem.each(function() {
 
@@ -43,6 +43,7 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
         
       }
     });
+
 
     if (movieLink == '') return;
 

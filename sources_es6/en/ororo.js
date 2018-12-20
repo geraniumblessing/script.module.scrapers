@@ -3,7 +3,7 @@ source = {
 	language: ['en'],
 	domains : ['ororo.tv'],
 	base_link : 'https://ororo.tv',
-  	moviesearch_link: 'moviesearch_link',
+  	moviesearch_link: '/moviesearch_link',
   	tvsearch_link: '/api/v2/shows',
 	movie_link : '/api/v2/movies/',
 	show_link: '/api/v2/shows/',
@@ -27,7 +27,7 @@ getSource = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback,
    		parse = parse['url'];
 
    		getDirect(libs, listHosts, {
-			'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': parse, 
+			'source': 'ororo', 'quality': 'HD', 'language': 'en', 'url': parse, 
 			'info': '', direct: true, 'debridonly': false
 		}, listDirect, callback);
 	} catch(e) {
@@ -41,13 +41,19 @@ movie = async (libs, listHosts,  infoMovie, listDirect, getDirect, callback)  =>
    	let url = source.base_link+source.moviesearch_link;
    	let urlCache = '';
 
+
    	let headers = {
    		'User-Agent': 'Incursion for Kodi',
    		'Authorization': `Basic ${libs.base64.encode(`${source.username}:${source.password}`)}`
    	};
 
+    console.log(url, headers);
+
    	let response = await libs.client.request(url, 'GET', {}, headers);
+
+    console.log(response); process.exit();
    	response = response['movies'];
+
 
    	for (let item in response) {
 

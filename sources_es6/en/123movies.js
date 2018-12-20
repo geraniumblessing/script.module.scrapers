@@ -49,8 +49,6 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 		token = token[1];
 		tokenCode = tokenCode[1];
 
-		console.log('token', token, tokenCode, seeds[3], seeds[4]);
-
 
 		const _93x580G = (s) => {return s.split("");}
 		const _e60xe8 = (r) => {
@@ -72,7 +70,7 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 
 		let headers = {
 			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			'x-token': _tsd_tsd_ds(token)
+			'x-token': _tsd_tsd_ds(token),
 		};
 		let body = {
 			'tokenCode': token,
@@ -80,9 +78,9 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 		};
 		let urlToken = source.source_link+source.decode_file;
 
-		let response = await libs.client.request(urlToken, 'POST', body, headers, true, iframe, '', '', '', 50000);
+		// console.log(urlToken, headers, body, iframe); process.exit();
+		let response = await libs.client.request(urlToken, 'POST', libs.qs.stringify(body), headers, true, iframe, '', '', '', 50000);
 
-		console.log('response', response);
 
 		if (response) {
 
@@ -98,13 +96,14 @@ const getLink = async (libs, listHosts, infoMovie, listDirect, getDirect, callba
 					      'info': '', direct: true, 'debridonly': false
 					    }, listDirect, callback);
 					} else {
+
+						console.log('direct', item);
 						getDirect(libs, listHosts, {
 					      'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': item, 
 					      'info': '', direct: false, 'debridonly': false
 					    }, listDirect, callback);
 					}
-				}
-				
+				}	
 			}
 		}
 		
@@ -166,7 +165,7 @@ tvshow = async (libs, listHosts, infoMovie, listDirect, getDirect, callback) => 
   try {
 
   	let urlMovie = libs.cleantitle.geturl(infoMovie.title);
-  	urlMovie = `${source.base_link}/episodes/${urlMovie}-${infoMovie.season}x${infoMovie.episode}/`;
+  	urlMovie = `${source.base_link}/episode/${urlMovie}-${infoMovie.season}x${infoMovie.episode}/`;
 
   	let parse = await libs.client.request(urlMovie, 'GET', {}, {}, false, '', '', '', 'dom');
   	let hrefMovie = parse('div.ds_seriesplay.dsclear a').attr('href');
