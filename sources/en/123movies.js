@@ -69,8 +69,6 @@ var getLink = function () {
 						token = token[1];
 						tokenCode = tokenCode[1];
 
-						console.log('token', token, tokenCode, seeds[3], seeds[4]);
-
 						_93x580G = function _93x580G(s) {
 							return s.split("");
 						};
@@ -104,24 +102,24 @@ var getLink = function () {
 							'_token': tokenCode
 						};
 						urlToken = source.source_link + source.decode_file;
-						_context.next = 28;
-						return libs.client.request(urlToken, 'POST', body, headers, true, iframe, '', '', '', 50000);
 
-					case 28:
+						// console.log(urlToken, headers, body, iframe); process.exit();
+
+						_context.next = 27;
+						return libs.client.request(urlToken, 'POST', libs.qs.stringify(body), headers, true, iframe, '', '', '', 50000);
+
+					case 27:
 						response = _context.sent;
 
-
-						console.log('response', response);
-
 						if (!response) {
-							_context.next = 50;
+							_context.next = 48;
 							break;
 						}
 
 						_iteratorNormalCompletion = true;
 						_didIteratorError = false;
 						_iteratorError = undefined;
-						_context.prev = 34;
+						_context.prev = 32;
 
 
 						for (_iterator = response[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -138,6 +136,8 @@ var getLink = function () {
 										'info': '', direct: true, 'debridonly': false
 									}, listDirect, callback);
 								} else {
+
+									console.log('direct', item);
 									getDirect(libs, listHosts, {
 										'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': item,
 										'info': '', direct: false, 'debridonly': false
@@ -145,55 +145,55 @@ var getLink = function () {
 								}
 							}
 						}
-						_context.next = 42;
+						_context.next = 40;
 						break;
 
-					case 38:
-						_context.prev = 38;
-						_context.t0 = _context['catch'](34);
+					case 36:
+						_context.prev = 36;
+						_context.t0 = _context['catch'](32);
 						_didIteratorError = true;
 						_iteratorError = _context.t0;
 
-					case 42:
-						_context.prev = 42;
-						_context.prev = 43;
+					case 40:
+						_context.prev = 40;
+						_context.prev = 41;
 
 						if (!_iteratorNormalCompletion && _iterator.return) {
 							_iterator.return();
 						}
 
-					case 45:
-						_context.prev = 45;
+					case 43:
+						_context.prev = 43;
 
 						if (!_didIteratorError) {
-							_context.next = 48;
+							_context.next = 46;
 							break;
 						}
 
 						throw _iteratorError;
 
+					case 46:
+						return _context.finish(43);
+
+					case 47:
+						return _context.finish(40);
+
 					case 48:
-						return _context.finish(45);
-
-					case 49:
-						return _context.finish(42);
-
-					case 50:
 						return _context.abrupt('return');
 
-					case 53:
-						_context.prev = 53;
+					case 51:
+						_context.prev = 51;
 						_context.t1 = _context['catch'](0);
 
 						console.log(String(_context.t1));
 						return _context.abrupt('return');
 
-					case 57:
+					case 55:
 					case 'end':
 						return _context.stop();
 				}
 			}
-		}, _callee, undefined, [[0, 53], [34, 38, 42, 50], [43,, 45, 49]]);
+		}, _callee, undefined, [[0, 51], [32, 36, 40, 48], [41,, 43, 47]]);
 	}));
 
 	return function getLink(_x, _x2, _x3, _x4, _x5, _x6, _x7) {
@@ -255,7 +255,7 @@ tvshow = function () {
 						_context3.prev = 0;
 						urlMovie = libs.cleantitle.geturl(infoMovie.title);
 
-						urlMovie = source.base_link + '/episodes/' + urlMovie + '-' + infoMovie.season + 'x' + infoMovie.episode + '/';
+						urlMovie = source.base_link + '/episode/' + urlMovie + '-' + infoMovie.season + 'x' + infoMovie.episode + '/';
 
 						_context3.next = 5;
 						return libs.client.request(urlMovie, 'GET', {}, {}, false, '', '', '', 'dom');

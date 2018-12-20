@@ -7,20 +7,23 @@ let config = {
 host = async (libs, embed, listDirect, callback) => {
 	try {
 
+
 		let parser = await libs.client.request(embed.url, 'GET');
+
 		let direct = await libs.client.request(config.api_get_direct, 'POST', {
 			'data': parser,
 			'token': libs.cryptoJs.MD5(parser + "teatv-openload").toString()
 		});
-		direct = JSON.parse(direct);
 
-		if (direct.code) return;
+		if (!direct) return;
 
 		let result = {
     		'source': embed.source, 'quality': embed.qual, 
-    		'language': embed.language, 'url': direct.direct, 'info': embed.info,
+    		'language': embed.language, 'url': direct.data, 'info': embed.info,
            	'direct': true, 'debridonly': embed.debridonly
         };
+
+        console.log(result);
 
         listDirect.push(result);
         callback(result);

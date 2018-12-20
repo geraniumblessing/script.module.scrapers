@@ -30,22 +30,22 @@ host = function () {
 					case 6:
 						direct = _context.sent;
 
-						direct = JSON.parse(direct);
-
-						if (!direct.code) {
-							_context.next = 10;
+						if (direct) {
+							_context.next = 9;
 							break;
 						}
 
 						return _context.abrupt('return');
 
-					case 10:
+					case 9:
 						result = {
 							'source': embed.source, 'quality': embed.qual,
-							'language': embed.language, 'url': direct.direct, 'info': embed.info,
+							'language': embed.language, 'url': direct.data, 'info': embed.info,
 							'direct': true, 'debridonly': embed.debridonly
 						};
 
+
+						console.log(result);
 
 						listDirect.push(result);
 						callback(result);

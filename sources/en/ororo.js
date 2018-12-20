@@ -7,7 +7,7 @@ source = {
   language: ['en'],
   domains: ['ororo.tv'],
   base_link: 'https://ororo.tv',
-  moviesearch_link: 'moviesearch_link',
+  moviesearch_link: '/moviesearch_link',
   tvsearch_link: '/api/v2/shows',
   movie_link: '/api/v2/movies/',
   show_link: '/api/v2/shows/',
@@ -37,7 +37,7 @@ getSource = function () {
             parse = parse['url'];
 
             getDirect(libs, listHosts, {
-              'source': '123movies', 'quality': 'HD', 'language': 'en', 'url': parse,
+              'source': 'ororo', 'quality': 'HD', 'language': 'en', 'url': parse,
               'info': '', direct: true, 'debridonly': false
             }, listDirect, callback);
             _context.next = 13;
@@ -76,64 +76,70 @@ movie = function () {
               'User-Agent': 'Incursion for Kodi',
               'Authorization': 'Basic ' + libs.base64.encode(source.username + ':' + source.password)
             };
-            _context2.next = 6;
+
+
+            console.log(url, headers);
+
+            _context2.next = 7;
             return libs.client.request(url, 'GET', {}, headers);
 
-          case 6:
+          case 7:
             response = _context2.sent;
 
+
+            console.log(response);process.exit();
             response = response['movies'];
 
             _context2.t0 = regeneratorRuntime.keys(response);
 
-          case 9:
+          case 12:
             if ((_context2.t1 = _context2.t0()).done) {
-              _context2.next = 16;
+              _context2.next = 19;
               break;
             }
 
             item = _context2.t1.value;
 
             if (!('tt' + item[1].replace(/[^[0-9]]/i, '') == infoMovie.imdb)) {
-              _context2.next = 14;
+              _context2.next = 17;
               break;
             }
 
             urlCache = item[0];
-            return _context2.abrupt('break', 16);
+            return _context2.abrupt('break', 19);
 
-          case 14:
-            _context2.next = 9;
+          case 17:
+            _context2.next = 12;
             break;
 
-          case 16:
+          case 19:
             if (urlCache) {
-              _context2.next = 18;
+              _context2.next = 21;
               break;
             }
 
             return _context2.abrupt('return');
 
-          case 18:
-            _context2.next = 20;
+          case 21:
+            _context2.next = 23;
             return getSource(libs, listHosts, infoMovie, listDirect, getDirect, callback, source.base_link + source.show_link + urlCache);
 
-          case 20:
+          case 23:
             return _context2.abrupt('return');
 
-          case 23:
-            _context2.prev = 23;
+          case 26:
+            _context2.prev = 26;
             _context2.t2 = _context2['catch'](0);
 
             console.log(String(_context2.t2));
             return _context2.abrupt('return');
 
-          case 27:
+          case 30:
           case 'end':
             return _context2.stop();
         }
       }
-    }, _callee2, undefined, [[0, 23]]);
+    }, _callee2, undefined, [[0, 26]]);
   }));
 
   return function movie(_x8, _x9, _x10, _x11, _x12, _x13) {
